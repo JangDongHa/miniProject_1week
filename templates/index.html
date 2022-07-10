@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+
+    <script>
+        // This is for test
+        function get(){
+            $.ajax({
+                type: "GET",
+                url: "/",
+                data: {},
+                success: function(response){
+                    console.log(response)
+                }
+            })
+        }
+
+    </script>
+</head>
+<body>
+  <h1>This is main page</h1>
+</body>
+</html>
