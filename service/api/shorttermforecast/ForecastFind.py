@@ -1,4 +1,4 @@
-from service.api.ForecastTypeEnum import ForecastType
+from service.api.shorttermforecast.ForecastTypeEnum import ForecastType
 
 
 class forecastFind:
