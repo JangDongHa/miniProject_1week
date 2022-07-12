@@ -1,6 +1,5 @@
 import db_connector
 
-
 def findUsersByUsers(): # find users data in users
     print("4. find users_data to mongodb in usersDao (4. usersDao가 유저데이터를 몽고db에서 찾습니다.)")
     db = db_connector.db_connect()
