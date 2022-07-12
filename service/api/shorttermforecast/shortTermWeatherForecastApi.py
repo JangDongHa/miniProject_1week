@@ -1,7 +1,7 @@
 import requests
 
-from service.api.ForecastFind import forecastFind
-from service.api.ForecastTypeEnum import ForecastType
+from service.api.shorttermforecast.ForecastFind import forecastFind
+from service.api.shorttermforecast.ForecastTypeEnum import ForecastType
 
 
 class ShortTermWeatherForecastApi():
