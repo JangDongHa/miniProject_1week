@@ -6,6 +6,7 @@
 - dnspython
 - pymongo
 - requests
+- pandas
 
 ## Environment
 - python 3.9

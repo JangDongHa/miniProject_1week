@@ -6,7 +6,7 @@ class sensibleTemperatureApi:
         self.configuration(base_time, areaNo)
 
     def configuration(self, base_time, areaNo): #base_time = 2022010318 <-
-        self.key = "YqFSfco5vUHbQReNWGXtoEXAhBLI01arfZyJjNEJ5pPEGV6qjiSydpE7lfk2SZuTEBMZt3ZEWkkBx4Btl7M59w=="
+        self.key = "wFaw7OFBqe4265nYPtDX2VQSJQke95gx56upeVRviZyp2TSZis/KZBM8Sc6fZwq8aF6vzD3HjIB3lzLOJBGYSQ=="
         self.url = "http://apis.data.go.kr/1360000/LivingWthrIdxServiceV2/getSenTaIdxV2"
 
         self.data = {
@@ -22,5 +22,6 @@ class sensibleTemperatureApi:
     def request_api(self):
         r = requests.get(self.url, params=self.data)
         response = r.json()
+        print(r.json())
 
         return response

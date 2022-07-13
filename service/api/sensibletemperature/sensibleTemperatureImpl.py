@@ -3,7 +3,7 @@ from service.api.sensibletemperature.sensibleTemperatureApi import sensibleTempe
 
 
 if __name__ == '__main__':
-    api = sensibleTemperatureApi('2022071112') # api configuration
+    api = sensibleTemperatureApi('2022071212') # api configuration
     response = api.request_api() # api 신청
     convertor = formatConvertor(response) # 컨버터 등록
     response = convertor.execute() # 컨버터 실행

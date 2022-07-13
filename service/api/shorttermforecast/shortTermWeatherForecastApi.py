@@ -9,7 +9,7 @@ class ShortTermWeatherForecastApi():
         self.configuration(x,y,base_date,base_time)
 
     def configuration(self, x, y, base_date, base_time):
-        self.key = "YqFSfco5vUHbQReNWGXtoEXAhBLI01arfZyJjNEJ5pPEGV6qjiSydpE7lfk2SZuTEBMZt3ZEWkkBx4Btl7M59w=="
+        self.key = 'wFaw7OFBqe4265nYPtDX2VQSJQke95gx56upeVRviZyp2TSZis/KZBM8Sc6fZwq8aF6vzD3HjIB3lzLOJBGYSQ=='
         self.url = "http://apis.data.go.kr/1360000/VilageFcstInfoService_2.0/getUltraSrtFcst"
         self.data = {
             'serviceKey': self.key,  # 공공데이터포털 서비스 인증 키
@@ -24,7 +24,10 @@ class ShortTermWeatherForecastApi():
 
     def request_api(self):
         r = requests.get(self.url, params=self.data)
-        response = r.json()
+        try:
+            response = r.json()
+        except:
+            raise Exception(r.text)
 
         return response
 
