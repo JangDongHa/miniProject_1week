@@ -51,7 +51,7 @@
                   <div class="d-flex justify-content-between mb-4 pb-2">
                     <div>
                       <h2 class="display-2"><strong>{{T1H[0]['fcstValue']}}°C</strong></h2>
-                      <p class="text-muted mb-0">Seoul, Korea</p>
+                      <p class="text-muted mb-0">{{ address.split(' ')[0] }}, 대한민국</p>
                     </div>
                     <div style="margin-top: 40px;">
                       <strong style="font-size: 50px; !important;">날씨 : {{ SKY[0]['fcstValue'] }}</strong>
@@ -117,7 +117,7 @@
                     <div class="flex-column">
                       <p class="medium"><strong>현재 주소</strong></p>
                       <i class="fas fa-sun fa-2x mb-3" style="color: #ddd;"></i>
-                      <p class="mb-0"><strong>서울 스파르타시 항해구 11동 도심속휴식터 아파트</strong></p>
+                      <p class="mb-0"><strong>{{ address }}</strong></p>
                     </div>
                     </div>
                   </div>
