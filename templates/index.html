@@ -3,349 +3,420 @@
 <head>
     <meta charset="UTF-8">
     <title>도심속휴식터</title>
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet"
+          integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"
+            integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM"
+            crossorigin="anonymous"></script>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
     <script src="static/js/user.js"></script>
     <link href="https://fonts.googleapis.com/css2?family=Nanum+Pen+Script&display=swap" rel="stylesheet">
     <script src="//t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
+    <script>
+
+        function execute(response) {
+            let temp_html = `<form><div>
+                                    <label for="exampleInputㅋEmail1" class="form-label">${response['userInfo']['address']}가 맞으신가요?</label>
+                                     <input type="email" class="form-control" id="address_kakao"
+                                               aria-describedby="emailHelp" value="${response['userInfo']['address']}"
+                                               readonly>
+                                     <div id="emailHelp" class="form-text">아니라면 클릭하여 바꿔주세요!</div>
+                                      </div></form>`
+            $('#here').append(temp_html)
+        }
+
+        function getSatus() {
+            $.ajax({
+                type: "GET",
+                url: "/getStatus",
+                data: {},
+                success: function (response) {
+                    let temp_html = ``
+                    if(response['bool'] === true){
+                        temp_html = `<button class="btn btn-primary btn-lg py-3 px-5 mb-2 mb-md-0 me-md-2" data-bs-toggle="modal" data-bs-target="#exampleModalCenter" style="">더위 피하러 가기!
+                                        </button>`
+                    } else {
+                        temp_html = `<button class="btn btn-primary btn-lg py-3 px-5 mb-2 mb-md-0 me-md-2" data-bs-toggle="modal" data-bs-target="#exampleModalCenter" style="" onClick = "window.location.href = '/login'">더위 피하러 가기!
+                                        </button>`
+                    }
+                    $('#loginCheck').after(temp_html)
+                }
+            });
+        }
+        getUserInfo(execute)
+        getSatus()
+
+    </script>
     <style>
-      * {
-        font-family: 'Nanum Pen Script', cursive;
-      }
-      .rounded-t-5 {
-        border-top-left-radius: 0.5rem;
-        border-top-right-radius: 0.5rem;
-      }
-
-      @media (min-width: 992px) {
-        .rounded-tr-lg-0 {
-          border-top-right-radius: 0;
+        * {
+            font-family: 'Nanum Pen Script', cursive;
         }
 
-        .rounded-bl-lg-5 {
-          border-bottom-left-radius: 0.5rem;
+        .rounded-t-5 {
+            border-top-left-radius: 0.5rem;
+            border-top-right-radius: 0.5rem;
         }
-      }
 
-       button {
-          background-color: #F9B514;
-          padding: 5px 10px;
-          border-radius: 4px;
-          cursor: pointer;
+        @media (min-width: 992px) {
+            .rounded-tr-lg-0 {
+                border-top-right-radius: 0;
+            }
+
+            .rounded-bl-lg-5 {
+                border-bottom-left-radius: 0.5rem;
+            }
+        }
+
+        button {
+            background-color: #F9B514;
+            padding: 5px 10px;
+            border-radius: 4px;
+            cursor: pointer;
         }
 
         .modal {
-          position: fixed;
-          top: 0;
-          left: 0;
-          width: 100%;
-          height: 100%;
-          display: flex;
-          justify-content: center;
-          align-items: center;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
         }
 
         .modal .bg {
-          width: 100%;
-          height: 100%;
-          background-color: rgba(0, 0, 0, 0.6);
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.6);
         }
 
         .modalBox {
-          position: absolute;
-          background-color: #fff;
-          width: 400px;
-          height: 200px;
-          padding: 15px;
+            position: absolute;
+            background-color: #fff;
+            width: 400px;
+            height: 200px;
+            padding: 15px;
         }
 
         .modalBox button {
-          display: block;
-          width: 80px;
-          margin: 0 auto;
+            display: block;
+            width: 80px;
+            margin: 0 auto;
         }
 
         .hidden {
-          display: none;
+            display: none;
         }
     </style>
 
 </head>
 <body>
-  {% include 'header.html' %}
-  </div>
-    <div>
-      <div data-draggable="true" style="position: relative;" draggable="false" class="">
-          <!---->
-          <!---->
-          <section draggable="false" class="overflow-hidden pt-0" data-v-271253ee="">
-              <section class="mb-10">
-                  <!-- Background image -->
-                  <div class="p-5 text-center bg-image" style="background-image: url('/static/img/indexBackground.jpg'); height: 500px; background-size: cover; background-position: 50% 50%; background-color: rgba(0, 0, 0, 0);" ></div> <!-- Background image -->
+{% include 'header.html' %}
+</div>
+<div>
+    <div data-draggable="true" style="position: relative;" draggable="false" class="">
+        <!---->
+        <!---->
+        <section draggable="false" class="overflow-hidden pt-0" data-v-271253ee="">
+            <section class="mb-10">
+                <!-- Background image -->
+                <div class="p-5 text-center bg-image"
+                     style="background-image: url('/static/img/indexBackground.jpg'); height: 500px; background-size: cover; background-position: 50% 50%; background-color: rgba(0, 0, 0, 0);"></div>
+                <!-- Background image -->
 
 
+                <!-- Modal -->
+                <div class="modal fade" id="exampleModalCenter" tabindex="-1" aria-labelledby="exampleModalCenterTitle"
+                     aria-hidden="true">
+                    <div class="modal-dialog modal-dialog-centered">
+                        <div class="modal-content">
+                            <div class="modal-header">
+                                <h5 class="modal-title" id="exampleModalLabel">주소를 확인해주세요!</h5>
+                                <button type="button" class="btn-close" data-bs-dismiss="modal"
+                                        aria-label="Close"></button>
+                            </div>
+                            <div class="modal-body" id="here">
 
-                              <!-- Modal -->
-                              <div class="modal fade" id="exampleModalCenter" tabindex="-1" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
-                                  <div class="modal-dialog modal-dialog-centered">
-                                      <div class="modal-content">
-                                          <div class="modal-header">
-                                              <h5 class="modal-title" id="exampleModalLabel">주소를 확인해주세요!</h5>
-                                              <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                                          </div>
-                                          <div class="modal-body">
-                                              <form>
-                                                  <div class="mb-3">
-                                                      <label for="exampleInputEmail1" class="form-label">서울 스파르타시 항해구 11동 도심속휴식터 아파트 가 맞으신가요?</label>
-                                                      <input type="email" class="form-control" id="address_kakao"
-                                                             aria-describedby="emailHelp" value="서울 스파르타시 항해구 11동 도심속휴식터 아파트" readonly>
-                                                      <div id="emailHelp" class="form-text">아니라면 클릭하여 바꿔주세요!</div>
-                                                  </div>
-                                              </form>
-                                          </div>
-                                          <div class="modal-footer">
-                                              <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">아니오</button>
-                                              <button type="submit" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModalCenter2" data-bs-dismiss="modal">네</button>
-                                          </div>
-                                      </div>
-                                  </div>
-                              </div>
+                            </div>
+                            <div class="modal-footer">
+                                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">아니오</button>
+                                <button type="submit" class="btn btn-primary" data-bs-toggle="modal"
+                                        data-bs-target="#exampleModalCenter2" data-bs-=dismiss"modal" onclick="postUserAddr()">네
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
 
-                            <!-- Modal -->
-                              <div class="modal fade" id="exampleModalCenter2" tabindex="-1" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
-                                  <div class="modal-dialog modal-dialog-centered">
-                                      <div class="modal-content">
-                                          <div class="modal-header">
-                                              <h5 class="modal-title" id="exampleModalLabel2">쉼터 종류를 확인해주세요!</h5>
-                                              <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                                          </div>
-                                          <div class="modal-body">
-                                              <form>
-                                                  <div class="mb-3">
-                                                      <label for="exampleInputEmail1" class="form-label">찾으시는 쉼터의 타입을 선택해주세요!</label>
-                                                          <select class="form-select form-select-lg mb-3" aria-label=".form-select-lg example">
-                                                          <option selected>선택</option>
-                                                          <option value="1">실내</option>
-                                                          <option value="2">야외</option>
-                                                        </select>
-                                                  </div>
-                                              </form>
-                                          </div>
-                                          <div class="modal-footer">
-                                              <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">취소</button>
-                                              <button type="submit" class="btn btn-primary" data-bs-dismiss="modal" onclick="window.location.href='/search'">선택</button>
-                                          </div>
-                                      </div>
-                                  </div>
-                              </div>
+                <!-- Modal -->
+                <div class="modal fade" id="exampleModalCenter2" tabindex="-1" aria-labelledby="exampleModalCenterTitle"
+                     aria-hidden="true">
+                    <div class="modal-dialog modal-dialog-centered">
+                        <div class="modal-content">
+                            <div class="modal-header">
+                                <h5 class="modal-title" id="exampleModalLabel2">쉼터 종류를 확인해주세요!</h5>
+                                <button type="button" class="btn-close" data-bs-dismiss="modal"
+                                        aria-label="Close"></button>
+                            </div>
+                            <div class="modal-body">
+                                <form>
+                                    <div class="mb-3">
+                                        <label for="exampleInputEmail1" class="form-label">찾으시는 쉼터의 타입을 선택해주세요!</label>
+                                        <select class="form-select form-select-lg mb-3"
+                                                aria-label=".form-select-lg example">
+                                            <option selected>선택</option>
+                                            <option value="1">실내</option>
+                                            <option value="2">야외</option>
+                                        </select>
+                                    </div>
+                                </form>
+                            </div>
+                            <div class="modal-footer">
+                                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">취소</button>
+                                <button type="submit" class="btn btn-primary" data-bs-dismiss="modal"
+                                        onclick="window.location.href='/search'">선택
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
 
-                  <div class="container">
-                      <div class="card mx-4 mx-md-5 text-center shadow-5-strong" style=" margin-top: -170px; background: hsla(0, 0%, 100%, 0.7); backdrop-filter: blur(30px); ">
-                          <div class="card-body px-4 py-5 px-md-5">
-                              <h1 class="display-3 fw-bold ls-tight mb-4"> <span>무더위를 한방에 날릴 수 있는</span> <br> <span class="text-danger">최고의 방법!</span> </h1>
-                              <button class="btn btn-primary btn-lg py-3 px-5 mb-2 mb-md-0 me-md-2" data-bs-toggle="modal" data-bs-target="#exampleModalCenter" style="">더위 피하러 가기!</button>
-                              <a class="btn btn-success btn-lg py-3 px-5 mb-2 mb-md-0 me-md-2" href="/weather" role="button" style="">잠깐! 날씨 확인하셨나요?</a>
-                          </div>
-                      </div>
-                  </div>
-              </section>
-          </section>
-          <!---->
-      </div> <!-- First Component -->
-      <div data-draggable="true" style="position: relative;">
-          <!---->
-          <!---->
-          <section draggable="false" class="container pt-5" data-v-271253ee="">
-              <section class="mb-10 text-center">
-                  <h2 class="fw-bold mb-5 text-center"> <u class="text-danger">도심속휴식터</u><span class="me-1"> 는 어떤 홈페이지인가요?</span> </h2>
-                  <div class="row gx-lg-5">
-                      <div class="col-md-4 mb-5 mb-md-0">
-                          <div class="p-3"> 📅</div>
-                          <h5 class="fw-bold mb-3">미니프로젝트</h5>
-                          <p class="text-muted mb-0">항해99 8기 c반 11조 팀장 외 3명과 함께 3일동안 열심히 만든 웹 서비스입니다.</p>
-                      </div>
-                      <div class="col-md-4 mb-5 mb-md-0">
-                          <div class="p-3"> 🤔</div>
-                          <h5 class="fw-bold mb-3">그래서 무엇을 할 수 있나요?</h5>
-                          <p class="text-muted mb-0">요즘 같은 무더위에 항상 고민하는 게 에어컨을 틀고 집에 있을까? 아니면 근처 카페처럼 시원한 곳을 갈까? 라는 생각을 많이 하시는 것 같아 준비했습니다. 저희 홈페이지에서 본인과 가장 가까운 무더위쉼터가 어디인지 확인하시고 오늘의 날씨도 한번씩 보고가세요!</p>
-                      </div>
-                      <div class="col-md-4 mb-5 mb-md-0">
-                          <div class="p-3">❤️ ️️</div>
-                          <h5 class="fw-bold mb-3">개발환경</h5>
-                          <p class="text-muted mb-0">Server Framework : Flask (Python 3.9) <br> Front : html, css, js (ajax, bootstrap) <br> Configure Management : github, notion</p>
-                      </div>
-                  </div>
-              </section>
-          </section>
-          <!---->
-      </div> <!-- Second Component -->
-      <div data-draggable="true" style="position: relative;">
-          <!---->
-          <!---->
-          <section draggable="false" class="container pt-5" data-v-271253ee="">
-              <section class="mb-10">
-                  <style>
+                <div class="container">
+                    <div class="card mx-4 mx-md-5 text-center shadow-5-strong"
+                         style=" margin-top: -170px; background: hsla(0, 0%, 100%, 0.7); backdrop-filter: blur(30px); ">
+                        <div class="card-body px-4 py-5 px-md-5">
+                            <h1 class="display-3 fw-bold ls-tight mb-4"><span>무더위를 한방에 날릴 수 있는</span> <br> <span
+                                    class="text-danger">최고의 방법!</span></h1>
+                            <div class="col" id="loginCheck">
 
-                  </style>
-                  <div class="card mb-3">
-                      <div class="row g-0 d-flex align-items-center">
-                          <div class="col-lg-4 d-none d-lg-flex"> <img src="static/img/registerBackground.jpg"  class="w-100 rounded-t-5 rounded-tr-lg-0 rounded-bl-lg-5" style="border-radius: 5px"> </div>
-                          <div class="col-lg-8">
-                              <div class="card-body py-5 px-md-5">
-                                  <h2 class="fw-bold mb-4" id="register_focus">도심속휴식터가 처음이신가요?</h2>
-                                  <p class="text-muted mb-4">아주아주 간단한 회원가입만으로 아래와 같은 다양한 기능을 체험해보실 수 있습니다. 지금 바로 가입하세요!</p>
-                                  <div class="row mb-3">
-                                      <div class="col-lg-4 mb-2">
-                                          <p> <i class="fas fa-check-circle text-success me-2"></i><span>실시간 날씨 정보</span> </p>
-                                      </div>
-                                      <div class="col-lg-4 mb-2">
-                                          <p> <i class="fas fa-check-circle text-success me-2"></i><span>무더위쉼터 찾기</span> </p>
-                                      </div>
-                                      <div class="col-lg-4 mb-2">
-                                          <p> <i class="fas fa-check-circle text-success me-2"></i><span>나만의 무더위쉼터 찜하기</span> </p>
-                                      </div>
-                                      <div class="col-lg-4 mb-2">
-                                          <p> <i class="fas fa-check-circle text-success me-2"></i><span>쉼터 지도 정보</span> </p>
-                                      </div>
-                                      <div class="col-lg-4 mb-2">
-                                          <p> <i class="fas fa-check-circle text-success me-2"></i><span>주소관리</span> </p>
-                                      </div>
-                                  </div> <button type="button" class="btn btn-primary btn-lg px-5" onclick="window.location.href = '/register'">회원가입</button>
-                              </div>
-                          </div>
-                      </div>
-                  </div>
-              </section>
-          </section>
-          <!---->
-      </div> <!-- Third Component -->
-      <div data-draggable="true" style="position: relative;">
-          <!---->
-          <!---->
-          <section draggable="false" class="container pt-5" data-v-271253ee="">
-              <section class="mb-10 text-center">
-                  <div class="row d-flex justify-content-center">
-                      <div class="col-md-10 col-xl-8">
-                          <h2 class="fw-bold mb-5">출연진들</h2>
-                      </div>
-                  </div>
-                  <div class="row">
-                      <div class="col-md-3 mb-5 mb-md-0">
-                          <div class="d-flex justify-content-center mb-4">
-                            <img src="https://opgg-com-image.akamaized.net/attach/images/20200521130943.1049686.jpg" class="rounded-circle shadow-1-strong" width="150" height="150">
-                          </div>
-                          <h5 class="mb-3">유은정</h5>
-                          <h6 class="text-primary mb-3">Back-end Developer</h6>
-                          <p class="px-xl-3">
+                            </div>
+
+                            <a class="btn btn-success btn-lg py-3 px-5 mb-2 mb-md-0 me-md-2" href="/weather"
+                               role="button" style="">잠깐! 날씨 확인하셨나요?</a>
+                        </div>
+                    </div>
+                </div>
+            </section>
+        </section>
+        <!---->
+    </div> <!-- First Component -->
+    <div data-draggable="true" style="position: relative;">
+        <!---->
+        <!---->
+        <section draggable="false" class="container pt-5" data-v-271253ee="">
+            <section class="mb-10 text-center">
+                <h2 class="fw-bold mb-5 text-center"><u class="text-danger">도심속휴식터</u><span
+                        class="me-1"> 는 어떤 홈페이지인가요?</span></h2>
+                <div class="row gx-lg-5">
+                    <div class="col-md-4 mb-5 mb-md-0">
+                        <div class="p-3"> 📅</div>
+                        <h5 class="fw-bold mb-3">미니프로젝트</h5>
+                        <p class="text-muted mb-0">항해99 8기 c반 11조 팀장 외 3명과 함께 3일동안 열심히 만든 웹 서비스입니다.</p>
+                    </div>
+                    <div class="col-md-4 mb-5 mb-md-0">
+                        <div class="p-3"> 🤔</div>
+                        <h5 class="fw-bold mb-3">그래서 무엇을 할 수 있나요?</h5>
+                        <p class="text-muted mb-0">요즘 같은 무더위에 항상 고민하는 게 에어컨을 틀고 집에 있을까? 아니면 근처 카페처럼 시원한 곳을 갈까? 라는 생각을 많이
+                            하시는 것 같아 준비했습니다. 저희 홈페이지에서 본인과 가장 가까운 무더위쉼터가 어디인지 확인하시고 오늘의 날씨도 한번씩 보고가세요!</p>
+                    </div>
+                    <div class="col-md-4 mb-5 mb-md-0">
+                        <div class="p-3">❤️ ️️</div>
+                        <h5 class="fw-bold mb-3">개발환경</h5>
+                        <p class="text-muted mb-0">Server Framework : Flask (Python 3.9) <br> Front : html, css, js
+                            (ajax, bootstrap) <br> Configure Management : github, notion</p>
+                    </div>
+                </div>
+            </section>
+        </section>
+        <!---->
+    </div> <!-- Second Component -->
+    <div data-draggable="true" style="position: relative;">
+        <!---->
+        <!---->
+        <section draggable="false" class="container pt-5" data-v-271253ee="">
+            <section class="mb-10">
+                <style>
+
+                </style>
+                <div class="card mb-3">
+                    <div class="row g-0 d-flex align-items-center">
+                        <div class="col-lg-4 d-none d-lg-flex"><img src="static/img/registerBackground.jpg"
+                                                                    class="w-100 rounded-t-5 rounded-tr-lg-0 rounded-bl-lg-5"
+                                                                    style="border-radius: 5px"></div>
+                        <div class="col-lg-8">
+                            <div class="card-body py-5 px-md-5">
+                                <h2 class="fw-bold mb-4" id="register_focus">도심속휴식터가 처음이신가요?</h2>
+                                <p class="text-muted mb-4">아주아주 간단한 회원가입만으로 아래와 같은 다양한 기능을 체험해보실 수 있습니다. 지금 바로
+                                    가입하세요!</p>
+                                <div class="row mb-3">
+                                    <div class="col-lg-4 mb-2">
+                                        <p><i class="fas fa-check-circle text-success me-2"></i><span>실시간 날씨 정보</span>
+                                        </p>
+                                    </div>
+                                    <div class="col-lg-4 mb-2">
+                                        <p><i class="fas fa-check-circle text-success me-2"></i><span>무더위쉼터 찾기</span>
+                                        </p>
+                                    </div>
+                                    <div class="col-lg-4 mb-2">
+                                        <p>
+                                            <i class="fas fa-check-circle text-success me-2"></i><span>나만의 무더위쉼터 찜하기</span>
+                                        </p>
+                                    </div>
+                                    <div class="col-lg-4 mb-2">
+                                        <p><i class="fas fa-check-circle text-success me-2"></i><span>쉼터 지도 정보</span>
+                                        </p>
+                                    </div>
+                                    <div class="col-lg-4 mb-2">
+                                        <p><i class="fas fa-check-circle text-success me-2"></i><span>주소관리</span></p>
+                                    </div>
+                                </div>
+                                <button type="button" class="btn btn-primary btn-lg px-5"
+                                        onclick="window.location.href = '/register'">회원가입
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+        </section>
+        <!---->
+    </div> <!-- Third Component -->
+    <div data-draggable="true" style="position: relative;">
+        <!---->
+        <!---->
+        <section draggable="false" class="container pt-5" data-v-271253ee="">
+            <section class="mb-10 text-center">
+                <div class="row d-flex justify-content-center">
+                    <div class="col-md-10 col-xl-8">
+                        <h2 class="fw-bold mb-5">출연진들</h2>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-md-3 mb-5 mb-md-0">
+                        <div class="d-flex justify-content-center mb-4">
+                            <img src="https://opgg-com-image.akamaized.net/attach/images/20200521130943.1049686.jpg"
+                                 class="rounded-circle shadow-1-strong" width="150" height="150">
+                        </div>
+                        <h5 class="mb-3">유은정</h5>
+                        <h6 class="text-primary mb-3">Back-end Developer</h6>
+                        <p class="px-xl-3">
                             <i class="fas fa-quote-left pe-2"></i>
                             <span>프로젝트 중에 자신의 소개글을 적어서 저에게 보내주세요.</span>
-                          </p>
-                          <ul class="list-unstyled d-flex justify-content-center mb-0">
-                              <li> <i class="fas fa-star fa-sm text-warning"></i> </li>
-                              <li> <i class="fas fa-star fa-sm text-warning"></i> </li>
-                              <li> <i class="fas fa-star fa-sm text-warning"></i> </li>
-                              <li> <i class="fas fa-star fa-sm text-warning"></i> </li>
-                              <li> <i class="fas fa-star-half-alt fa-sm text-warning"></i> </li>
-                          </ul>
-                      </div>
-                      <div class="col-md-3 mb-5 mb-md-0">
-                          <div class="d-flex justify-content-center mb-4">
-                            <img src="https://item.kakaocdn.net/do/bef59207f5155a4eddd632c9a833e80d7154249a3890514a43687a85e6b6cc82" class="rounded-circle shadow-1-strong" width="150" height="150">
-                          </div>
-                          <h5 class="mb-3">장동하</h5>
-                          <h6 class="text-primary mb-3">Back-end Developer</h6>
-                          <p class="px-xl-3">
+                        </p>
+                        <ul class="list-unstyled d-flex justify-content-center mb-0">
+                            <li><i class="fas fa-star fa-sm text-warning"></i></li>
+                            <li><i class="fas fa-star fa-sm text-warning"></i></li>
+                            <li><i class="fas fa-star fa-sm text-warning"></i></li>
+                            <li><i class="fas fa-star fa-sm text-warning"></i></li>
+                            <li><i class="fas fa-star-half-alt fa-sm text-warning"></i></li>
+                        </ul>
+                    </div>
+                    <div class="col-md-3 mb-5 mb-md-0">
+                        <div class="d-flex justify-content-center mb-4">
+                            <img src="https://item.kakaocdn.net/do/bef59207f5155a4eddd632c9a833e80d7154249a3890514a43687a85e6b6cc82"
+                                 class="rounded-circle shadow-1-strong" width="150" height="150">
+                        </div>
+                        <h5 class="mb-3">장동하</h5>
+                        <h6 class="text-primary mb-3">Back-end Developer</h6>
+                        <p class="px-xl-3">
                             <i class="fas fa-quote-left pe-2"></i>
                             <span>프로젝트 중에 자신의 소개글을 적어서 저에게 보내주세요.</span>
-                          </p>
-                          <ul class="list-unstyled d-flex justify-content-center mb-0">
-                              <li> <i class="fas fa-star fa-sm text-warning"></i> </li>
-                              <li> <i class="fas fa-star fa-sm text-warning"></i> </li>
-                              <li> <i class="fas fa-star fa-sm text-warning"></i> </li>
-                              <li> <i class="fas fa-star fa-sm text-warning"></i> </li>
-                              <li> <i class="fas fa-star fa-sm text-warning"></i> </li>
-                          </ul>
-                      </div>
-                      <div class="col-md-3 mb-0">
-                          <div class="d-flex justify-content-center mb-4">
-                            <img src="https://opgg-com-image.akamaized.net/attach/images/20200521130943.1049686.jpg" class="rounded-circle shadow-1-strong" width="150" height="150">
-                          </div>
-                          <h5 class="mb-3" >노진서</h5>
-                          <h6 class="text-primary mb-3">Web Developer</h6>
-                          <p class="px-xl-3">
-                            <i class="fas fa-quote-left pe-2"></i>
-                            <span>프로젝트 중에 자신의 소개글을 적어서 저에게 보내주세요.</span>
-                          </p>
-                          <ul class="list-unstyled d-flex justify-content-center mb-0">
-                              <li> <i class="fas fa-star fa-sm text-warning"></i> </li>
-                              <li> <i class="fas fa-star fa-sm text-warning"></i> </li>
-                              <li> <i class="fas fa-star fa-sm text-warning"></i> </li>
-                              <li> <i class="fas fa-star fa-sm text-warning"></i> </li>
-                              <li> <i class="far fa-star fa-sm text-warning"></i> </li>
-                          </ul>
-                      </div>
+                        </p>
+                        <ul class="list-unstyled d-flex justify-content-center mb-0">
+                            <li><i class="fas fa-star fa-sm text-warning"></i></li>
+                            <li><i class="fas fa-star fa-sm text-warning"></i></li>
+                            <li><i class="fas fa-star fa-sm text-warning"></i></li>
+                            <li><i class="fas fa-star fa-sm text-warning"></i></li>
+                            <li><i class="fas fa-star fa-sm text-warning"></i></li>
+                        </ul>
+                    </div>
                     <div class="col-md-3 mb-0">
-                          <div class="d-flex justify-content-center mb-4">
-                            <img src="https://opgg-com-image.akamaized.net/attach/images/20200521130943.1049686.jpg" class="rounded-circle shadow-1-strong" width="150" height="150">
-                          </div>
-                          <h5 class="mb-3" >박민정</h5>
-                          <h6 class="text-primary mb-3">Back-end Developer</h6>
-                          <p class="px-xl-3">
+                        <div class="d-flex justify-content-center mb-4">
+                            <img src="https://opgg-com-image.akamaized.net/attach/images/20200521130943.1049686.jpg"
+                                 class="rounded-circle shadow-1-strong" width="150" height="150">
+                        </div>
+                        <h5 class="mb-3">노진서</h5>
+                        <h6 class="text-primary mb-3">Web Developer</h6>
+                        <p class="px-xl-3">
                             <i class="fas fa-quote-left pe-2"></i>
                             <span>프로젝트 중에 자신의 소개글을 적어서 저에게 보내주세요.</span>
-                          </p>
-                          <ul class="list-unstyled d-flex justify-content-center mb-0">
-                              <li> <i class="fas fa-star fa-sm text-warning"></i> </li>
-                              <li> <i class="fas fa-star fa-sm text-warning"></i> </li>
-                              <li> <i class="fas fa-star fa-sm text-warning"></i> </li>
-                              <li> <i class="fas fa-star fa-sm text-warning"></i> </li>
-                              <li> <i class="far fa-star fa-sm text-warning"></i> </li>
-                          </ul>
-                      </div>
-                  </div>
-              </section>
-          </section>
-          <!---->
-      </div> <!-- Fifth Component -->
-      <div data-draggable="true" style="position: relative;">
-          <!---->
-          <!---->
-          <section draggable="false" class="container pt-5" data-v-271253ee="">
-              <section class="mb-10 text-center">
-                  <div class="p-5">
-                      <h2 class="my-5 display-5 fw-bold ls-tight"> <span>저희의 개발 과정이 궁금하다면</span> <br> <span class="text-primary">아래 링크를 확인하세요!</span> </h2>
+                        </p>
+                        <ul class="list-unstyled d-flex justify-content-center mb-0">
+                            <li><i class="fas fa-star fa-sm text-warning"></i></li>
+                            <li><i class="fas fa-star fa-sm text-warning"></i></li>
+                            <li><i class="fas fa-star fa-sm text-warning"></i></li>
+                            <li><i class="fas fa-star fa-sm text-warning"></i></li>
+                            <li><i class="far fa-star fa-sm text-warning"></i></li>
+                        </ul>
+                    </div>
+                    <div class="col-md-3 mb-0">
+                        <div class="d-flex justify-content-center mb-4">
+                            <img src="https://opgg-com-image.akamaized.net/attach/images/20200521130943.1049686.jpg"
+                                 class="rounded-circle shadow-1-strong" width="150" height="150">
+                        </div>
+                        <h5 class="mb-3">박민정</h5>
+                        <h6 class="text-primary mb-3">Back-end Developer</h6>
+                        <p class="px-xl-3">
+                            <i class="fas fa-quote-left pe-2"></i>
+                            <span>프로젝트 중에 자신의 소개글을 적어서 저에게 보내주세요.</span>
+                        </p>
+                        <ul class="list-unstyled d-flex justify-content-center mb-0">
+                            <li><i class="fas fa-star fa-sm text-warning"></i></li>
+                            <li><i class="fas fa-star fa-sm text-warning"></i></li>
+                            <li><i class="fas fa-star fa-sm text-warning"></i></li>
+                            <li><i class="fas fa-star fa-sm text-warning"></i></li>
+                            <li><i class="far fa-star fa-sm text-warning"></i></li>
+                        </ul>
+                    </div>
+                </div>
+            </section>
+        </section>
+        <!---->
+    </div> <!-- Fifth Component -->
+    <div data-draggable="true" style="position: relative;">
+        <!---->
+        <!---->
+        <section draggable="false" class="container pt-5" data-v-271253ee="">
+            <section class="mb-10 text-center">
+                <div class="p-5">
+                    <h2 class="my-5 display-5 fw-bold ls-tight"><span>저희의 개발 과정이 궁금하다면</span> <br> <span
+                            class="text-primary">아래 링크를 확인하세요!</span></h2>
                     <!-- Github -->
-                    <a class="btn btn-dark btn-lg me-md-2 mb-3" href="https://github.com/JangDongHa/miniProject_1week" role="button" target="_blank">
-                      <span>Github</span>
+                    <a class="btn btn-dark btn-lg me-md-2 mb-3" href="https://github.com/JangDongHa/miniProject_1week"
+                       role="button" target="_blank">
+                        <span>Github</span>
                     </a>
                     <!-- Notion -->
-                    <a class="btn btn-primary btn-lg me-md-2 mb-3" style="background-color: #55acee" href="https://big-berry-c23.notion.site/35a589ff5b5d495686264ee201514d6c" role="button" target="_blank">
-                    <i class="fab fa-twitter me-2"></i>
-                    <span>Notion</span> </a>
+                    <a class="btn btn-primary btn-lg me-md-2 mb-3" style="background-color: #55acee"
+                       href="https://big-berry-c23.notion.site/35a589ff5b5d495686264ee201514d6c" role="button"
+                       target="_blank">
+                        <i class="fab fa-twitter me-2"></i>
+                        <span>Notion</span> </a>
                     <!-- Youtube -->
-                    <a class="btn btn-primary btn-lg me-md-2 mb-3" style="background-color: #ed302f" href="#!" role="button">
-                    <span>YouTube</span> </a>
-                  </div>
-              </section>
-          </section>
-          <!---->
-      </div> <!-- sixth Component -->
-  </div>
-    {% include 'footer.html' %}
-  </body>
+                    <a class="btn btn-primary btn-lg me-md-2 mb-3" style="background-color: #ed302f" href="#!"
+                       role="button">
+                        <span>YouTube</span> </a>
+                </div>
+            </section>
+        </section>
+        <!---->
+    </div> <!-- sixth Component -->
+</div>
+{% include 'footer.html' %}
+</body>
 <script>
 
-  document.getElementById("address_kakao").addEventListener("click", function(){
-      new daum.Postcode({
-              oncomplete: function(data) {
-                  console.log(data.jibunAddress) // 구 지번
-                  console.log(data.address) // 신 지번
-                  console.log($('#address_kakao').val())
-                  $('#address_kakao').val(data.address)
-              }
+    document.getElementById("address_kakao").addEventListener("click", function () {
+        new daum.Postcode({
+            oncomplete: function (data) {
+                console.log(data.jibunAddress) // 구 지번
+                console.log(data.address) // 신 지번
+                console.log($('#address_kakao').val())
+                $('#address_kakao').val(data.address)
+            }
         }).open();
     });
 
-  </script>
+</script>
 </html>
