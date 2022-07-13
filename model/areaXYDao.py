@@ -19,7 +19,6 @@ def findareaXYBylatlon(lat, lon):  # if many result data then return only one da
 
 def findareaXYBygudong(gu, dong):  # if many result data then return only one data
     returnlist = []
-    gu = gudong_except_discover(gu, dong)
     try:
         returnlist = list(db.areaXY.find({'gu': gu, 'dong': dong}, {'_id': False}))[0]
     except:
@@ -31,10 +30,11 @@ def findareaXYBygudong(gu, dong):  # if many result data then return only one da
         except:
             return list(db.areaXY.find({'gu': gu}, {'_id': False}))
 
+    if len(returnlist) == 0:
+        try:
+            return list(db.areaXY.find({'gu': gu+dong}, {'_id': False}))[0]
+        except:
+            return list(db.areaXY.find({'gu': gu+dong}, {'_id': False}))
+
     fail = {}
     return fail
-
-def gudong_except_discover(gu, dong):
-    if gu == "성남시":
-        return gu+dong
-    return gu
