@@ -4,7 +4,10 @@ from service.api.shorttermforecast.ForecastTypeEnum import ForecastType
 class forecastFind:
 
     def __init__(self, response):
-        self.items = response.get('response').get('body').get('items').get('item')
+        try:
+            self.items = response.get('response').get('body').get('items').get('item')
+        except:
+            raise Exception(response)
 
     def category(self, enum):
         list = []

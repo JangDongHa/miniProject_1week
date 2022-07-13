@@ -12,14 +12,16 @@ class formatConvertor:
             self.data = data
 
     def setData(self, data):
-        self.data = data
+        try:
+            self.data = data.get('response').get('body').get('items').get('item')[0]
+        except:
+            self.data = data
 
     def convert_h(self, data, key):
         try:
             addTime = int(key.split('h')[1])  # split h1
         except:
             print('key format Error in formatConvertor')
-
         dataDatetime = self.date_to_datetime(data.get('date'))
         dataDatetime = self.datetime_add_hHours(dataDatetime, addTime)
 
@@ -57,6 +59,7 @@ class formatConvertor:
     def datetime_add_hHours(self, datetime, hours):
         return datetime + timedelta(hours=hours)
 
+
     def datetime_to_string(self, datetime):
         year = datetime.strftime('%Y')
         month = datetime.strftime('%m')
@@ -64,8 +67,7 @@ class formatConvertor:
         time = datetime.strftime('%H')
         return year + month + day + time
 
-    def data_to_custom_predict_data(self,
-                                    untilTime):  # untilTime : 에를들어 기본 date가 202201012200 이면 여기서부터 예측값 6시간후까지 뽑으려면 untilTime=6
+    def data_to_custom_predict_data(self, untilTime):  # untilTime : 에를들어 기본 date가 202201012200 이면 여기서부터 예측값 6시간후까지 뽑으려면 untilTime=6
         default_len = 3
         keys = list(self.data.keys())  # 3 = h1 ~ (길이 3부터 h1 ~)
         values = list(self.data.values())
@@ -73,6 +75,19 @@ class formatConvertor:
         for i in range(0, default_len + untilTime):
             newData[keys[i]] = values[i]
         return newData
+
+    def get_predict_list_data(self, number, dateStr):
+        dateTime = self.date_to_datetime(dateStr)
+        list_data = []
+        for i in range(0,number):
+            dateTime = self.datetime_add_hHours(dateTime, 1)
+            dateStr = self.datetime_to_string(dateTime)
+            temp = self.data.get(dateStr) # 온도
+            print('dateStr',dateStr)
+            list_data.append()
+
+        return list_data
+
 
 
 if __name__ == '__main__':
