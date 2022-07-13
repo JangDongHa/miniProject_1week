@@ -123,7 +123,7 @@ def start(app, data=''):
             return jsonify({'result': 'success', 'bool': False})
 
 
-    @app.route('/postUserAddr', methods=['POST'])
+    @app.route('/updateAddr', methods=['POST'])
     def postUserAddr():
         try:
             address = request.form['address_receive']
@@ -133,10 +133,11 @@ def start(app, data=''):
                                                       {'$set': {"address": address}},
                                                       {'_id': 0},
                                                       return_document=ReturnDocument.AFTER)
+            print(userinfo)
             if userinfo is not None:
                 return jsonify({'result': 'success', 'msg': '정보가 변경되었습니다.'})
             else:
-                return jsonify({'result': 'fail', 'msg': '비밀번호를 다시 입력해주세요.'})
+                return jsonify({'result': 'fail'})
         except jwt.ExpiredSignatureError:
             return jsonify({'result': 'fail', 'msg': '로그인 시간이 만료되었습니다.'})
         except jwt.exceptions.DecodeError:

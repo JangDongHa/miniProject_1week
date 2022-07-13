@@ -24,7 +24,28 @@
                                       </div></form>`
             $('#here').append(temp_html)
         }
+
+        function getSatus() {
+            $.ajax({
+                type: "GET",
+                url: "/getStatus",
+                data: {},
+                success: function (response) {
+                    let temp_html = ``
+                    if(response['bool'] === true){
+                        temp_html = `<button class="btn btn-primary btn-lg py-3 px-5 mb-2 mb-md-0 me-md-2" data-bs-toggle="modal" data-bs-target="#exampleModalCenter" style="">더위 피하러 가기!
+                                        </button>`
+                    } else {
+                        temp_html = `<button class="btn btn-primary btn-lg py-3 px-5 mb-2 mb-md-0 me-md-2" data-bs-toggle="modal" data-bs-target="#exampleModalCenter" style="" onClick = "window.location.href = '/login'">더위 피하러 가기!
+                                        </button>`
+                    }
+                    $('#loginCheck').after(temp_html)
+                }
+            });
+        }
         getUserInfo(execute)
+        getSatus()
+
     </script>
     <style>
         * {
@@ -121,7 +142,7 @@
                             <div class="modal-footer">
                                 <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">아니오</button>
                                 <button type="submit" class="btn btn-primary" data-bs-toggle="modal"
-                                        data-bs-target="#exampleModalCenter2" data-bs-=dismiss"modal">네
+                                        data-bs-target="#exampleModalCenter2" data-bs-=dismiss"modal" onclick="postUserAddr()">네
                                 </button>
                             </div>
                         </div>
@@ -167,9 +188,10 @@
                         <div class="card-body px-4 py-5 px-md-5">
                             <h1 class="display-3 fw-bold ls-tight mb-4"><span>무더위를 한방에 날릴 수 있는</span> <br> <span
                                     class="text-danger">최고의 방법!</span></h1>
-                            <button class="btn btn-primary btn-lg py-3 px-5 mb-2 mb-md-0 me-md-2" data-bs-toggle="modal"
-                                    data-bs-target="#exampleModalCenter" style="">더위 피하러 가기!
-                            </button>
+                            <div class="col" id="loginCheck">
+
+                            </div>
+
                             <a class="btn btn-success btn-lg py-3 px-5 mb-2 mb-md-0 me-md-2" href="/weather"
                                role="button" style="">잠깐! 날씨 확인하셨나요?</a>
                         </div>

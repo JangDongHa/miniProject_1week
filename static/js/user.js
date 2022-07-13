@@ -94,7 +94,6 @@ function sign_up() {
 
 }
 
-
 function sign_out() {
     // user의 token을 지우면 로그아웃! jquery에서 쿠키를 삭제하는 함수.
     $.removeCookie('mytoken', {path: '/'});
@@ -102,7 +101,9 @@ function sign_out() {
     // 로그아웃 후 login 페이지로 보내준다.
     window.location.href = "/login"
 }
+
 function getUserInfo(execute) {
+
     $.ajax({
         type: "GET",
         url: "/getUserInfo",
@@ -112,3 +113,19 @@ function getUserInfo(execute) {
         }
     });
 }
+
+function postUserAddr() {
+    let address =  $("#address_kakao").val()
+    console.log(address)
+    $.ajax({
+        type: "POST",
+        url: "/updateAddr",
+        data: {
+            address_receive: address
+        },
+        success: function (response) {
+            console.log(response)
+        }
+    });
+}
+
