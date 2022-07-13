@@ -29,6 +29,17 @@
             font-size: 30px !important;
         }
     </style>
+  <script>
+    $.ajax({
+      type: "GET",
+      url: 'api/weather',
+      data:{},
+      success: function(response){
+        console.log(response)
+        console.log('print')
+      }
+    })
+  </script>
 </head>
 <body>
 {% include 'header.html' %}
@@ -36,8 +47,8 @@
          style="background-image: url('/static/img/loginBackground.jpg'); background-size : cover; background-repeat : no-repeat;">
     <div class="container py-5 h-100">
 
-        <div id="cont" class="row d-flex justify-content-center align-items-center h-100" style="color: #282828;">
-            <div class="col-md-9 col-lg-7 col-xl-5">
+    <div id="cont" class="row d-flex justify-content-center align-items-center h-100" style="color: #282828;">
+      <div class="col-md-10 col-lg-7 col-xl-8">
 
                 <div class="card mb-4 gradient-custom" style="border-radius: 25px;">
                     <div class="card-body p-4">
@@ -64,6 +75,25 @@
                                 </div>
                             </div>
                         </div>
+
+
+            <div id="demo1" class="carousel slide" data-ride="carousel">
+              <!-- Indicators -->
+              <ul class="carousel-indicators mb-0">
+                <li data-target="#demo1" data-slide-to="0" class="active"></li>
+                <li data-target="#demo1" data-slide-to="1"></li>
+                <li data-target="#demo1" data-slide-to="2"></li>
+              </ul>
+              <!-- Carousel inner -->
+              <div class="carousel-inner">
+                <div class="carousel-item active">
+                  <div class="d-flex justify-content-between mb-4 pb-2">
+                    <div>
+                      <h2 class="display-2"><strong>{{T1H[0]['fcstValue']}}°C</strong></h2>
+                      <p class="text-muted mb-0">{{ address.split(' ')[0] }}, 대한민국</p>
+                    </div>
+                    <div style="margin-top: 40px;">
+                      <strong style="font-size: 50px; !important;">날씨 : {{ SKY[0]['fcstValue'] }}</strong>
 
                     </div>
                 </div>
@@ -129,7 +159,34 @@
                             </div>
                         </div>
 
-                    </div>
+
+            <div id="demo2" class="carousel slide" data-ride="carousel">
+              <!-- Indicators -->
+              <ul class="carousel-indicators mb-0">
+                <li data-target="#demo2" data-slide-to="0"></li>
+                <li data-target="#demo2" data-slide-to="1" class="active"></li>
+                <li data-target="#demo2" data-slide-to="2"></li>
+              </ul>
+              <!-- Carousel inner -->
+              <div class="carousel-inner">
+                <div class="carousel-item active">
+                  <div class="d-flex justify-content-around text-center mb-4 pb-3 pt-2">
+                    {% for i in range(0, 6)%}
+                        <div class="flex-column">
+                          <p class="medium" style="{{check_weather(T1H[i]['fcstValue'])}}"><strong>{{T1H[i]['fcstValue']}}°C</strong></p>
+                          <i class="fas fa-sun fa-2x mb-3" style="color: #ddd;"></i>
+                          <p class="mb-0"><strong>{{ PTY[i]['fcstTime'][0:2] ~':'~ PTY[0]['fcstTime'][2:] }}</strong></p>
+                          <p class="mb-0 text-muted" style="font-size: .65rem;">PM</p>
+                          <p class="mb-0" style="{{check_weather(PTY[i]['fcstValue'])}}">{{ PTY[i]['fcstValue'] }}</p>
+                          <p class="mb-0 text-muted" style="font-size: .65rem;">강수(강우)</p>
+                          <p class="mb-0" style="{{check_weather(SKY[i]['fcstValue'])}}">{{ SKY[i]['fcstValue'] }}</p>
+                          <p class="mb-0 text-muted" style="font-size: .65rem;">날씨</p>
+                        </div>
+                    {% endfor %}
+
+
+                  </div>
+
                 </div>
 
                 <div class="card" style="border-radius: 25px;">
@@ -151,12 +208,23 @@
                                             <i class="fas fa-sun fa-2x mb-3" style="color: #ddd;"></i>
                                             <div class="col" id="here">
 
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
+
+            <div id="demo3" class="carousel slide" data-ride="carousel">
+              <!-- Indicators -->
+              <ul class="carousel-indicators mb-0">
+                <li data-target="#demo3" data-slide-to="0"></li>
+                <li data-target="#demo3" data-slide-to="1"></li>
+                <li data-target="#demo3" data-slide-to="2" class="active"></li>
+              </ul>
+              <!-- Carousel inner -->
+              <div class="carousel-inner">
+                <div class="carousel-item active">
+                  <div class="d-flex justify-content-around text-center mb-4 pb-3 pt-2">
+                    <div class="flex-column">
+                      <p class="medium"><strong>현재 주소</strong></p>
+                      <i class="fas fa-sun fa-2x mb-3" style="color: #ddd;"></i>
+                      <p class="mb-0"><strong>{{ address }}</strong></p>
+
                     </div>
 
                 </div>
@@ -168,11 +236,20 @@
                     </button>
                 </div>
             </div>
+
+
+          </div>
+          <div>
+            <button type="button"
+                            class="btn btn-success btn-block btn-lg gradient-custom-4 text-body" style="color: white !important; margin-top: 10px; margin-left: 40%;" onclick="gotoMain()">메인화면으로{{weather_data}}</button>
+          </div>
+
         </div>
     </div>
 
-    </div>
-    {% include 'footer.html' %}
+
+  {% include 'footer.html' %}
+
 </section>
 </body>
 <script>
