@@ -22,13 +22,13 @@ def findareaXYBygudong(gu, dong):  # if many result data then return only one da
     try:
         returnlist = list(db.areaXY.find({'gu': gu, 'dong': dong}, {'_id': False}))[0]
     except:
-        returnlist = list(db.areaXY.find({'gu': gu, 'dong': dong}, {'_id': False}))
+        pass
 
     if len(returnlist) == 0:
         try:
             return list(db.areaXY.find({'gu': gu}, {'_id': False}))[0]
         except:
-            return list(db.areaXY.find({'gu': gu}, {'_id': False}))
+            pass
 
     if len(returnlist) == 0:
         try:

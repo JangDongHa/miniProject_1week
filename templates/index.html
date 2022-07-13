@@ -13,7 +13,6 @@
     <link href="https://fonts.googleapis.com/css2?family=Nanum+Pen+Script&display=swap" rel="stylesheet">
     <script src="//t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
     <script>
-
         function execute(response) {
             let temp_html = `<form><div>
                                     <label for="exampleInputㅋEmail1" class="form-label">${response['userInfo']['address']}가 맞으신가요?</label>
@@ -28,7 +27,7 @@
         function getSatus() {
             $.ajax({
                 type: "GET",
-                url: "/getStatus",
+                url: "/api/getStatus",
                 data: {},
                 success: function (response) {
                     let temp_html = ``
