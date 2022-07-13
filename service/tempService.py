@@ -1,21 +1,22 @@
 from model import areaXYDao
 from service.api.sensibletemperature.formatConvertor import formatConvertor
 from service.api.sensibletemperature.sensibleTemperatureApi import sensibleTemperatureApi
-from datetime import datetime
+from datetime import datetime, timedelta
 
 from service.api.shorttermforecast.ForecastTypeEnum import ForecastType
 from service.api.shorttermforecast.shortTermWeatherForecastApi import ShortTermWeatherForecastApi
 from service.util.definitionRisk import check_risk
 
 
-def get_today():
+def get_today_minus_1():
     convertor = formatConvertor()
-    today = convertor.datetime_to_string(datetime.today())
+    today = convertor.datetime_to_string(datetime.today() - timedelta(hours=1))
     return today
 
 
+
 def get_SKY_PTY_T1H_in_short_term_forecast(x=37, y=126):
-    today = get_today()
+    today = get_today_minus_1()
     ymd = today[0:6]
     time = today[6:] + '00'
     api = ShortTermWeatherForecastApi(x, y, ymd, time)  # API 기본 Configuration (x, y, 검색날짜, 검색시간)
@@ -32,7 +33,7 @@ def get_SKY_PTY_T1H_in_short_term_forecast(x=37, y=126):
 
 def get_sensible_temp_present(time_range):
     convertor = formatConvertor()
-    today = get_today()
+    today = get_today_minus_1()
 
     api = sensibleTemperatureApi(today)  # api configuration
     response = api.request_api()  # api 신청
@@ -42,7 +43,7 @@ def get_sensible_temp_present(time_range):
     print(convertor.get_predict_list_data(time_range, today))
 
 
-def get_info_from_address(address=''):  # 구, 동 으로 정보를 찾아냄. 정보가 없으면 구로만 검색한 결과를 뿌려줌
+def get_info_from_address(address):  # 구, 동 으로 정보를 찾아냄. 정보가 없으면 구로만 검색한 결과를 뿌려줌
     addList = address.split(' ')
     gu, dong = addList[1], addList[2]
     return areaXYDao.findareaXYBygudong(gu, dong)

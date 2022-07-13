@@ -106,13 +106,14 @@
       let startYPoint;
       let startAddress;
 
+
       let url = "http://map.naver.com/index.nhn?slng=126.8966655 (출발좌표X)&slat=37.4830969 (출발좌표Y)&stext=출발지이름&elng=127.0276368 (도착좌표X)&elat=37.4979502 (도착좌표Y)&etext=도착지이름&menu=route&pathType=1"
 
 
 
       $(document).ready(function () {
                   currentLocation();
-                  list_shelter();
+
                   // mark_location(x_cen, y_cen)
                   // make_marker(x_cen, y_cen)
 
@@ -128,7 +129,7 @@
                       let rows = response["shelter_info"]
                       //console.log(rows[0]['shelter_name'])
                       console.log (rows)
-
+                        $("#shelterList").empty()
 
                       for (let i = 0; i < rows.length; i++) {
                         let shelterName = rows[i]['restname']
@@ -137,17 +138,18 @@
                         let shelterType = rows[i]['equptype']
                         let xcord = rows[i]['xcord']
                         let ycord = rows[i]['ycord']
+                        let chckMatterWkendHdayOpnAt = rows[i]['chckMatterWkendHdayOpnAt']
                         detailInfo = rows
 
                         console.log(shelterName)
 
                         let temp_html = `<div class="card"  style="width: 32rem; display: flex; justify-content: center; margin: auto; margin-top: 10px">
-                                          <div class="card-body">
-                                            <h5 class="card-title" onclick="detailModal(${i}, detailInfo[${i}])" data-bs-toggle="modal" data-bs-target="#exampleModalCenter">${shelterName}</h5>
+                                          <div class="card-body" data-bs-toggle="modal" data-bs-target="#exampleModalCenter" onclick="detailModal(${i}, detailInfo[${i}])">
+                                            <h5 class="card-title"  >${shelterName}</h5>
                                             <p class="card-text">주소 : ${shelterAddress}</p>
                                             <p class="card-text">시설 유형 : ${shelterType}</p>
                                             <p class="card-text">이용가능인원 : ${shelterMaxPeople}</p>
-                                            <p class="card-text">좌표 : ${xcord} , ${ycord}</p>
+                                            <p class="card-text">휴일개방 : ${chckMatterWkendHdayOpnAt}</p>
 
                                           </div>
                                       </div>`
@@ -206,15 +208,18 @@
                         <p>주소 : ${detailInfo['restaddr']}</p>
                         <p>시설 유형 : ${detailInfo['equptype']}</p>
                         <p>이용가능인원 : ${detailInfo['usePsblNmpr']}</p>
+                        <p>선풍기보유대수 : ${detailInfo['colrHoldElefn']}</p>
+                        <p>에어컨보유대수 : ${detailInfo['colrHoldArcndtn']}</p>
+                        <p>야간개방 : ${detailInfo['chckMatterNightOpnAt']}</p>
+                        <p>휴일개방 : ${detailInfo['chckMatterWkendHdayOpnAt']}</p>
                         <p>좌표 : ${detailInfo['xcord']} , ${detailInfo['ycord']}</p>
 
-                        <a href="http://map.naver.com/index.nhn?slng=${startXPoint}&slat=${startYPoint}&stext=${startAddress}&elng=${endXPoint}&elat=${endYPoint}&etext=${endAddress}&menu=route&pathType=1" target="_blank">지도로 길찾기</a>
-                        <h2>지도</h2>
-                        <p>Map will be in here...</p>
+                        <h2>지도    <a class="btn btn-success btn-lg py-2 px-3 mb-2 mb-md-0 me-md-2" href="http://map.naver.com/index.nhn?slng=${startXPoint}&slat=${startYPoint}&stext=${startAddress}&elng=${endXPoint}&elat=${endYPoint}&etext=${endAddress}&menu=route&pathType=1" target="_blank">지도로 길찾기</a></h2>
 
                     </div>
 
                   `
+
                   $('#shelter-detail').append(temp_html);
       }
 
@@ -261,16 +266,17 @@
                       console.log(address,xcord,ycord)
 
                       $('#current-address').append(address);
-
+                      list_shelter();
                     }
                 });
 
       }
 
 
+
+
       function mark_location(x_cen, y_cen){
           $("#map").html("")
-          console.log("좌표는 : " + x_cen +", "+y_cen);
           map = new naver.maps.Map('map', {
                       center: new naver.maps.LatLng(x_cen, y_cen),
                       zoom: 12,
@@ -278,9 +284,11 @@
                       zoomControlOptions: {
                       style: naver.maps.ZoomControlStyle.SMALL,
                       position: naver.maps.Position.TOP_RIGHT
-                    }
+                    },
                   });
-
+          var $window = $(window);
+          var size = new naver.maps.Size(450, 450);
+          map.setSize(size);
 
       }
 
@@ -331,39 +339,13 @@
 
                               </div>
                               <div class="modal-footer" style="display: flex; justify-content: center; margin: auto;">
-                                  <button  type="button" class="btn btn-primary" data-bs-dismiss="modal">길찾기</button>
+                                  <button  type="button" class="btn btn-primary" data-bs-dismiss="modal">닫기</button>
                               </div>
                           </div>
                       </div>
                   </div>
 
-                  <!-- Modal -->
-                    <div class="modal fade" id="exampleModalCenter2" tabindex="-1" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
-                        <div class="modal-dialog modal-dialog-centered">
-                            <div class="modal-content">
-                                <div class="modal-header">
-                                    <h5 class="modal-title" id="exampleModalLabel2">쉼터 종류를 확인해주세요!</h5>
-                                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                                </div>
-                                <div class="modal-body">
-                                    <form>
-                                        <div class="mb-3">
-                                            <label for="exampleInputEmail1" class="form-label">찾으시는 쉼터의 타입을 선택해주세요!</label>
-                                                <select class="form-select form-select-lg mb-3" aria-label=".form-select-lg example">
-                                                <option selected>선택</option>
-                                                <option value="1">실내</option>
-                                                <option value="2">야외</option>
-                                              </select>
-                                        </div>
-                                    </form>
-                                </div>
-                                <div class="modal-footer">
-                                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">아니오</button>
-                                    <button type="submit" class="btn btn-primary" data-bs-dismiss="modal">네</button>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
+
 
 
                     <div class="container">
@@ -371,11 +353,10 @@
                           <div class="card-body px-4 py-5 px-md-5">
                               <h1 class="display-3 fw-bold ls-tight mb-4"> <a href="/"> <img src="/static/img/logo.png" alt="" width="160" height="100" class="d-inline-block align-text-top" style="border-radius: 20px">  </a><br> <span>검색결과</span> </h1>
                               <span style="font-size: 40px">현재 주소 : <span id="current-address"> </span></span><br>
-                              <button class="btn btn-danger btn-lg py-3 px-3 mb-2 mb-md-0 me-md-2"  style="">현재 주소 재탐색</button>
                               <a class="btn btn-success btn-lg py-3 px-4 mb-2 mb-md-0 me-md-2" href="#" role="button" style="">주소 변경</a>
 
                               <div id="shelterList">
-
+                                <img src='/static/img/loading.gif' style="width: 200px; height: 200px;">
 
                               </div>
                           </div>

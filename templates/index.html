@@ -13,10 +13,9 @@
     <link href="https://fonts.googleapis.com/css2?family=Nanum+Pen+Script&display=swap" rel="stylesheet">
     <script src="//t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
     <script>
-
         function execute(response) {
             let temp_html = `<form><div>
-                                    <label for="exampleInputㅋEmail1" class="form-label">${response['userInfo']['address']}가 맞으신가요?</label>
+                                    <label for="exampleInputEmail1" class="form-label">${response['userInfo']['address']}가 맞으신가요?</label>
                                      <input type="email" class="form-control" id="address_kakao"
                                                aria-describedby="emailHelp" value="${response['userInfo']['address']}"
                                                readonly>
@@ -28,7 +27,7 @@
         function getSatus() {
             $.ajax({
                 type: "GET",
-                url: "/getStatus",
+                url: "/api/getStatus",
                 data: {},
                 success: function (response) {
                     let temp_html = ``
@@ -142,7 +141,7 @@
                             <div class="modal-footer">
                                 <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">아니오</button>
                                 <button type="submit" class="btn btn-primary" data-bs-toggle="modal"
-                                        data-bs-target="#exampleModalCenter2" data-bs-=dismiss"modal" onclick="postUserAddr()">네
+                                        data-bs-target="#exampleModalCenter2" data-bs-dismiss="modal" onclick="postUserAddr()">네
                                 </button>
                             </div>
                         </div>
@@ -295,7 +294,7 @@
                 <div class="row">
                     <div class="col-md-3 mb-5 mb-md-0">
                         <div class="d-flex justify-content-center mb-4">
-                            <img src="https://opgg-com-image.akamaized.net/attach/images/20200521130943.1049686.jpg"
+                            <img src="https://i.pinimg.com/originals/aa/90/80/aa9080e6e8957a7224e488469eedf12d.gif"
                                  class="rounded-circle shadow-1-strong" width="150" height="150">
                         </div>
                         <h5 class="mb-3">유은정</h5>
@@ -333,7 +332,7 @@
                     </div>
                     <div class="col-md-3 mb-0">
                         <div class="d-flex justify-content-center mb-4">
-                            <img src="https://opgg-com-image.akamaized.net/attach/images/20200521130943.1049686.jpg"
+                            <img src="https://item.kakaocdn.net/do/eb6a9ca588502796a29f7e0a235af37f8f324a0b9c48f77dbce3a43bd11ce785"
                                  class="rounded-circle shadow-1-strong" width="150" height="150">
                         </div>
                         <h5 class="mb-3">노진서</h5>
@@ -352,7 +351,7 @@
                     </div>
                     <div class="col-md-3 mb-0">
                         <div class="d-flex justify-content-center mb-4">
-                            <img src="https://opgg-com-image.akamaized.net/attach/images/20200521130943.1049686.jpg"
+                            <img src="https://item.kakaocdn.net/do/7c7a5f2d7e721b5c37a16d3b1afd35b99f17e489affba0627eb1eb39695f93dd"
                                  class="rounded-circle shadow-1-strong" width="150" height="150">
                         </div>
                         <h5 class="mb-3">박민정</h5>
