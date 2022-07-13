@@ -119,10 +119,10 @@
 
 
                       for (let i = 0; i < rows.length; i++) {
-                        let shelterName = rows[i]['shelter_name']
-                        let shelterAddress = rows[i]['shelter_address']
-                        let shelterMaxPeople = rows[i]['shelter_max_people']
-                        let shelterType = rows[i]['shelter_type']
+                        let shelterName = rows[i]['restname']
+                        let shelterAddress = rows[i]['restaddr']
+                        let shelterMaxPeople = rows[i]['usePsblNmpr']
+                        let shelterType = rows[i]['equptype']
                         let xcord = rows[i]['xcord']
                         let ycord = rows[i]['ycord']
                         detailInfo = rows
@@ -175,22 +175,28 @@
 
           console.log(detailInfo['xcord']);
 
+
+          let endXPoint = detailInfo['xcord'];
+          let endYPoint = detailInfo['ycord'];
+          let endAddress = detailInfo['restaddr'];
+
           $('#shelter-detail').empty();
 
           console.log(startXPoint, startYPoint, startAddress)
+          console.log(endXPoint, endYPoint,endAddress)
 
           let temp_html = `
                     <div id="modal-${i}">
 
-                        <h2>${detailInfo['shelter_name']}</h2>
+                        <h2>${detailInfo['restname']}</h2>
 
                         <h3>상세정보</h3>
-                        <p>주소 : ${detailInfo['shelter_address']}</p>
-                        <p>시설 유형 : ${detailInfo['shelter_type']}</p>
-                        <p>이용가능인원 : ${detailInfo['shelter_max_people']}</p>
+                        <p>주소 : ${detailInfo['restaddr']}</p>
+                        <p>시설 유형 : ${detailInfo['equptype']}</p>
+                        <p>이용가능인원 : ${detailInfo['usePsblNmpr']}</p>
                         <p>좌표 : ${detailInfo['xcord']} , ${detailInfo['ycord']}</p>
 
-                        <a href="http://map.naver.com/index.nhn?slng=${startXPoint}&slat=${startYPoint}&stext=${startAddress}&elng=${detailInfo['xcord']}&elat=${detailInfo['ycord']}&etext=${detailInfo['shelter_name']}&menu=route&pathType=1" target="_blank">지도로 길찾기</a>
+                        <a href="http://map.naver.com/index.nhn?slng=${startXPoint}&slat=${startYPoint}&stext=${startAddress}&elng=${endXPoint}&elat=${endYPoint}&etext=${endAddress}&menu=route&pathType=1" target="_blank">지도로 길찾기</a>
                         <h2>지도</h2>
                         <p>Map will be in here...</p>
 
@@ -254,7 +260,7 @@
           $("#map").html("")
           console.log("좌표는 : " + x_cen +", "+y_cen);
           map = new naver.maps.Map('map', {
-                      center: new naver.maps.LatLng(y_cen, x_cen),
+                      center: new naver.maps.LatLng(x_cen, y_cen),
                       zoom: 12,
                       zoomControl: true,
                       zoomControlOptions: {
@@ -268,7 +274,7 @@
 
       function make_marker(x_cen, y_cen){
           marker = new naver.maps.Marker({
-                    position: new naver.maps.LatLng(y_cen, x_cen),
+                    position: new naver.maps.LatLng(x_cen, y_cen),
                     map: map
                 });
       }

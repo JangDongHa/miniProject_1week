@@ -1,6 +1,11 @@
 from flask import Flask, render_template, request, jsonify
 import requests
 
+from service.api.heatshelter import shelterApi
+
+
+
+
 def start(app, data=''):
     headers = {
         "X-NCP-APIGW-API-KEY-ID": "6rjx5nfk5b",
@@ -9,35 +14,16 @@ def start(app, data=''):
 
     @app.route('/shelter', methods=["GET"])
     def get_shelter_location():
-        restname = "6.25참전유공자경로당"
-        restaddr = "서울특별시 종로구 팔운대로 88, 지하1층 6.25참전유공자경로당(신교동)"
-        equptype = "노인시설"
-        usePsblNmpr = 100
-        xcord = 127.0379399
-        ycord = 37.4981125
-        # 쉼터 API 예시
-        shelter_info = [{
-            'shelter_name': restname,
-            'shelter_address': restaddr,
-            'shelter_type': equptype,
-            'shelter_max_people': usePsblNmpr,
-            'xcord': xcord,
-            'ycord': ycord
-        }, {
-            'shelter_name': "종로회당",
-            'shelter_address': "종로구 종로시 종로로",
-            'shelter_type': "체육시설",
-            'shelter_max_people': 39,
-            'xcord': 126.3241,
-            'ycord': 36.9999
-        }
-        ]
-        print(shelter_info)
-        return jsonify({'msg': 'hello', 'shelter_info': shelter_info})
+        url = 'http://apis.data.go.kr/1741000/HeatWaveShelter2/getHeatWaveShelterList2'
+        data = shelterApi.setting_data('4687025000')
+        result = shelterApi.get_all_equptype_data(url, data)  # 형태 : list({},{},{}....)
+        myData = shelterApi.get_need_result(result)  # 그 중에서 필요한 데이터만 정제한 것
+
+        return jsonify({'msg': 'hello', 'shelter_info': myData})
 
     @app.route('/current', methods=["GET"])
     def get_current_location():
-        address = "서울 마포구 와우산로21길 36-6"
+        address = "서울 마포구 와우산로21길 36-6" #임시 현재 주소
 
         # print(address)
 
