@@ -1,13 +1,5 @@
 
 from flask import Flask, render_template, jsonify, request, redirect, url_for, flash
-
-from werkzeug.utils import secure_filename
-from datetime import datetime, timedelta
-import jwt
-import hashlib
-
-from pymongo import MongoClient, ReturnDocument
-
 from service import userService
 
 
@@ -16,7 +8,6 @@ import db_connector
 
 db = db_connector.db_connect()
 
-from service.ipService import get_address_from_ip
 
 
 

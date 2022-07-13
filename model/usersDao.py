@@ -28,3 +28,7 @@ def findEmailPasswordByUsers(email, password):
 def findOneAndUpdateByusers(username, password, address):
     return db.users.find_one_and_update({'email': username, 'password': password},
                                               {'$set': {"address": address}})
+
+def findOneAndUpdateAddrByusers(username, address):
+    return db.users.find_one_and_update({'email': username},
+                                              {'$set': {"address": address}})

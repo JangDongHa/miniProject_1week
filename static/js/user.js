@@ -38,7 +38,6 @@ function sign_in() {
         success: function (response) {
             if (response['result'] == 'success') {
                 $.cookie('mytoken', response['token'], {path: '/'}); // 서버로부터 받은 토큰을 쿠키에 저장
-                alert("로그인 되었습니다!")
                 window.location.replace("/")
             } else {
                 alert(response['msg'])

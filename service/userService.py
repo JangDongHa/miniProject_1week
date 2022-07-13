@@ -36,7 +36,7 @@ def get_jwt_user_info(token_receive):
 def change_jwt_user_address_info(token_receive, address):
 
     payload = jwt.decode(token_receive, SECRET_KEY, algorithms=['HS256'])
-    userInfo = usersDao.findOneAndUpdateByusers(payload['id'], address)
+    userInfo = usersDao.findOneAndUpdateAddrByusers(payload['id'], address)
 
     return userInfo
 

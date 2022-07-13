@@ -1,4 +1,4 @@
-from flask import Flask, render_template, request, jsonify
+from flask import Flask, render_template, request, jsonify, redirect, url_for
 
 from model.localDto import localDTO
 from service import userService, ipService, tempService
@@ -12,9 +12,14 @@ def start(app, data=''):
 
     @app.route('/weather', methods=['GET'])
     def get_weather():
+        if (request.cookies.get('mytoken')):
+            pass
+        else:
+            return redirect(url_for("getLogin"))
         address = userService.get_jwt_user_info(request.cookies.get('mytoken'))['address']
+        print(address)
         info = tempService.get_info_from_address(address)
-        x,y = info['x'], info['y']
+        x, y = info['x'], info['y']
         SKY, PTY, T1H = tempService.get_SKY_PTY_T1H_in_short_term_forecast(x, y)
         print(T1H)
         return render_template('weather.html', SKY=SKY, PTY=PTY, T1H=T1H, check_weather=check_weather, address=address)

@@ -37,4 +37,4 @@ def findareaXYBygudong(gu, dong):  # if many result data then return only one da
             return list(db.areaXY.find({'gu': gu+dong}, {'_id': False}))
 
     fail = {}
-    return fail
+    return returnlist
