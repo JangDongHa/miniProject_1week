@@ -55,8 +55,6 @@ function sign_up() {
     let username = $("#input-name").val()
     let email = $("#input-email").val()
 
-    console.log(email)
-
     if (password == "") {
         $("#help-password").text("비밀번호를 입력해주세요.").removeClass("is-safe").addClass("is-danger")
         $("#input-password").focus()
@@ -96,27 +94,6 @@ function sign_up() {
 
 }
 
-function sign_up() {
-    let password = $("#input-password").val()
-
-
-    $.ajax({
-        type: "POST",
-        url: "/sign_up",
-        data: {
-            username_give: username,
-            password_give: password,
-            email_give: email,
-            address_give: address
-        },
-        success: function (response) {
-            alert("회원가입을 축하드립니다!")
-            window.location.replace("/login")
-        }
-    });
-
-}
-
 function sign_out() {
     // user의 token을 지우면 로그아웃! jquery에서 쿠키를 삭제하는 함수.
     $.removeCookie('mytoken', {path: '/'});
@@ -124,3 +101,17 @@ function sign_out() {
     // 로그아웃 후 login 페이지로 보내준다.
     window.location.href = "/login"
 }
+
+function getUserInfo(execute) {
+    $.ajax({
+        type: "GET",
+        url: "/getUserInfo",
+        data: {},
+        success: function (response) {
+            execute(response)
+        }
+    });
+}
+
+
+
