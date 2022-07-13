@@ -96,26 +96,7 @@ function sign_up() {
 
 }
 
-function sign_up() {
-    let password = $("#input-password").val()
 
-
-    $.ajax({
-        type: "POST",
-        url: "/sign_up",
-        data: {
-            username_give: username,
-            password_give: password,
-            email_give: email,
-            address_give: address
-        },
-        success: function (response) {
-            alert("회원가입을 축하드립니다!")
-            window.location.replace("/login")
-        }
-    });
-
-}
 
 function sign_out() {
     // user의 token을 지우면 로그아웃! jquery에서 쿠키를 삭제하는 함수.
