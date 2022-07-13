@@ -1,8 +1,11 @@
+
 from flask import Flask, render_template, jsonify, request, redirect, url_for, flash
+
 from werkzeug.utils import secure_filename
 from datetime import datetime, timedelta
 import jwt
 import hashlib
+
 from pymongo import MongoClient, ReturnDocument
 
 SECRET_KEY = "SPARTA"
@@ -10,9 +13,11 @@ from service import userService
 
 import db_connector
 
+
 db = db_connector.db_connect()
 
 from service.ipService import get_address_from_ip
+
 
 
 def start(app, data=''):
@@ -38,6 +43,7 @@ def start(app, data=''):
             return redirect(url_for("getUser"))
         else:
             return render_template('register.html')
+
 
     @app.route('/sign_up', methods=['POST'])
     def sign_up():
@@ -142,5 +148,6 @@ def start(app, data=''):
             return jsonify({'result': 'fail', 'msg': '로그인 시간이 만료되었습니다.'})
         except jwt.exceptions.DecodeError:
             return jsonify({'result': 'fail', 'msg': '로그인 정보가 존재하지 않습니다.'})
+
 
 

@@ -55,6 +55,7 @@ function sign_up() {
     let username = $("#input-name").val()
     let email = $("#input-email").val()
 
+
     if (password == "") {
         $("#help-password").text("비밀번호를 입력해주세요.").removeClass("is-safe").addClass("is-danger")
         $("#input-password").focus()
@@ -101,6 +102,7 @@ function sign_out() {
     // 로그아웃 후 login 페이지로 보내준다.
     window.location.href = "/login"
 }
+
 
 function getUserInfo(execute) {
 
