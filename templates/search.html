@@ -1,0 +1,183 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>도심속휴식터</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Nanum+Pen+Script&display=swap" rel="stylesheet">
+    <style>
+      * {
+        font-family: 'Nanum Pen Script', cursive;
+      }
+      .rounded-t-5 {
+        border-top-left-radius: 0.5rem;
+        border-top-right-radius: 0.5rem;
+      }
+
+      @media (min-width: 992px) {
+        .rounded-tr-lg-0 {
+          border-top-right-radius: 0;
+        }
+
+        .rounded-bl-lg-5 {
+          border-bottom-left-radius: 0.5rem;
+        }
+      }
+
+       button {
+          background-color: #F9B514;
+          padding: 5px 10px;
+          border-radius: 4px;
+          cursor: pointer;
+        }
+
+        .modal {
+          position: fixed;
+          top: 0;
+          left: 0;
+          width: 100%;
+          height: 100%;
+          display: flex;
+          justify-content: center;
+          align-items: center;
+        }
+
+        .modal .bg {
+          width: 100%;
+          height: 100%;
+          background-color: rgba(0, 0, 0, 0.6);
+        }
+
+        .modalBox {
+          position: absolute;
+          background-color: #fff;
+          width: 400px;
+          height: 200px;
+          padding: 15px;
+        }
+
+        .modalBox button {
+          display: block;
+          width: 80px;
+          margin: 0 auto;
+        }
+
+        .hidden {
+          display: none;
+        }
+    </style>
+
+</head>
+<body>
+  {% include 'header.html' %}
+  </div>
+    <div>
+      <div data-draggable="true" style="position: relative;" draggable="false" class="">
+          <!---->
+          <!---->
+          <section draggable="false" class="overflow-hidden pt-0" data-v-271253ee="">
+              <section class="mb-10">
+                  <!-- Background image -->
+                  <div class="p-5 text-center bg-image" style="background-image: url('/static/img/indexBackground.jpg'); height: 500px; background-size: cover; background-position: 50% 50%; background-color: rgba(0, 0, 0, 0);"></div> <!-- Background image -->
+
+
+
+                              <!-- Modal -->
+                              <div class="modal fade" id="exampleModalCenter" tabindex="-1" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+                                  <div class="modal-dialog modal-dialog-centered">
+                                      <div class="modal-content">
+                                          <div class="modal-header">
+                                              <h5 class="modal-title" id="exampleModalLabel">상세 정보 보기</h5>
+                                              <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                                          </div>
+                                          <div class="modal-body">
+                                              <form>
+                                                  <div class="mb-3">
+                                                      <h2>잠실엘스경로당</h2><br>
+
+                                                      <h3>상세정보</h3>
+                                                      <p>주소 : 서울특별시 송파구 잠실동 올림픽로 99, 노인정(잠실동, 잠실엘스)</p>
+                                                      <p>시설 유형 : 노인시설</p>
+                                                      <p>이용가능인원 : 50명</p>
+                                                      <p>거리 : 300m</p>
+
+                                                      <h2>지도</h2>
+                                                      <p>Map will be in here...</p>
+                                                  </div>
+                                              </form>
+                                          </div>
+                                          <div class="modal-footer" style="display: flex; justify-content: center; margin: auto;">
+                                              <button type="button" class="btn btn-primary" data-bs-dismiss="modal">길찾기</button>
+                                          </div>
+                                      </div>
+                                  </div>
+                              </div>
+
+                            <!-- Modal -->
+                              <div class="modal fade" id="exampleModalCenter2" tabindex="-1" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+                                  <div class="modal-dialog modal-dialog-centered">
+                                      <div class="modal-content">
+                                          <div class="modal-header">
+                                              <h5 class="modal-title" id="exampleModalLabel2">쉼터 종류를 확인해주세요!</h5>
+                                              <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                                          </div>
+                                          <div class="modal-body">
+                                              <form>
+                                                  <div class="mb-3">
+                                                      <label for="exampleInputEmail1" class="form-label">찾으시는 쉼터의 타입을 선택해주세요!</label>
+                                                          <select class="form-select form-select-lg mb-3" aria-label=".form-select-lg example">
+                                                          <option selected>선택</option>
+                                                          <option value="1">실내</option>
+                                                          <option value="2">야외</option>
+                                                        </select>
+                                                  </div>
+                                              </form>
+                                          </div>
+                                          <div class="modal-footer">
+                                              <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">아니오</button>
+                                              <button type="submit" class="btn btn-primary" data-bs-dismiss="modal">네</button>
+                                          </div>
+                                      </div>
+                                  </div>
+                              </div>
+
+                  <div class="container">
+                      <div class="card mx-4 mx-md-5 text-center shadow-5-strong" style=" margin-top: -170px; background: hsla(0, 0%, 100%, 0.7); backdrop-filter: blur(30px); ">
+                          <div class="card-body px-4 py-5 px-md-5">
+                              <h1 class="display-3 fw-bold ls-tight mb-4"> <a href="/"> <img src="/static/img/logo.png" alt="" width="160" height="100" class="d-inline-block align-text-top" style="border-radius: 20px">  </a><br> <span>검색결과</span> </h1>
+                              <span style="font-size: 40px">현재 주소 : 서울 스파르타시 항해구 11동 도심속휴식터 아파트</span><br>
+                              <button class="btn btn-danger btn-lg py-3 px-3 mb-2 mb-md-0 me-md-2"  style="">현재 주소 재탐색</button>
+                              <a class="btn btn-success btn-lg py-3 px-4 mb-2 mb-md-0 me-md-2" href="#" role="button" style="">주소 변경</a>
+                              <div class="card" style="width: 32rem; display: flex; justify-content: center; margin: auto; margin-top: 10px" data-bs-toggle="modal" data-bs-target="#exampleModalCenter">
+                                <div class="card-body">
+                                    <h5 class="card-title">잠실엘스경로당</h5>
+                                    <p class="card-text">주소 : 서울특별시 송파구 잠실동 올림픽로 99, 노인정(잠실동, 잠실엘스)</p>
+                                    <p class="card-text">시설 유형 : 노인시설</p>
+                                    <p class="card-text">이용가능인원 : 50명</p>
+                                    <p class="card-text">거리 : 300m</p>
+                                    <p class="card-text">참고 : 아래껀 상세보기 안됨(여긴 이쪽 div 클릭하면 됨) 아래도 되게 할 수 있는데 script 안쓰다보니 똑같은거 또 추가해야 해서 더러워질까봐 안해둠</p>
+                                </div>
+                              </div>
+                              <div class="card" style="width: 32rem; display: flex; justify-content: center; margin: auto; margin-top: 10px">
+                                <div class="card-body">
+                                     <h5 class="card-title">송파어린이도서관</h5>
+                                     <p class="card-text">주소 : 서울특별시 송파구 올림픽로 105</p>
+                                     <p class="card-text">시설 유형 : 기타</p>
+                                     <p class="card-text">이용가능인원 : 50명</p>
+                                     <p class="card-text">거리 : 400m</p>
+                                     <a href="#" class="btn btn-primary">상세보기</a>
+                                </div>
+                              </div>
+                          </div>
+                      </div>
+                  </div>
+              </section>
+          </section>
+          <!---->
+      </div> <!-- First Component -->
+  </div>
+    {% include 'footer.html' %}
+  </body>
+</html>

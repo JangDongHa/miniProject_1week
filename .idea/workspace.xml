@@ -3,16 +3,7 @@
   <component name="ChangeListManager">
     <list default="true" id="bdcf9157-6d63-478f-b259-e18501117e82" name="변경" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/README.md" beforeDir="false" afterPath="$PROJECT_DIR$/README.md" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/app.py" beforeDir="false" afterPath="$PROJECT_DIR$/app.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/controller/userController.py" beforeDir="false" afterPath="$PROJECT_DIR$/controller/userController.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/model/usersDao.py" beforeDir="false" afterPath="$PROJECT_DIR$/model/usersDao.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/service/api/sensibletemperature/formatConvertor.py" beforeDir="false" afterPath="$PROJECT_DIR$/service/api/sensibletemperature/formatConvertor.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/service/api/sensibletemperature/sensibleTemperatureApi.py" beforeDir="false" afterPath="$PROJECT_DIR$/service/api/sensibletemperature/sensibleTemperatureApi.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/service/api/sensibletemperature/sensibleTemperatureImpl.py" beforeDir="false" afterPath="$PROJECT_DIR$/service/api/sensibletemperature/sensibleTemperatureImpl.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/service/api/shorttermforecast/shortTermWeatherForecastApi.py" beforeDir="false" afterPath="$PROJECT_DIR$/service/api/shorttermforecast/shortTermWeatherForecastApi.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/service/api/shorttermforecast/shortTermWeatherForecastImpl.py" beforeDir="false" afterPath="$PROJECT_DIR$/service/api/shorttermforecast/shortTermWeatherForecastImpl.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/service/userService.py" beforeDir="false" afterPath="$PROJECT_DIR$/service/userService.py" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -74,7 +65,29 @@
       <recent name="C:\Users\jdh33\OneDrive\Desktop\SpartaCoding\miniProject_1week\service\api" />
     </key>
   </component>
-  <component name="RunManager" selected="Python.tempService">
+  <component name="RunManager" selected="Python.app">
+    <configuration name="app" type="PythonConfigurationType" factoryName="Python" temporary="true" nameIsGenerated="true">
+      <module name="miniProject_1week" />
+      <option name="INTERPRETER_OPTIONS" value="" />
+      <option name="PARENT_ENVS" value="true" />
+      <envs>
+        <env name="PYTHONUNBUFFERED" value="1" />
+      </envs>
+      <option name="SDK_HOME" value="" />
+      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$" />
+      <option name="IS_MODULE_SDK" value="true" />
+      <option name="ADD_CONTENT_ROOTS" value="true" />
+      <option name="ADD_SOURCE_ROOTS" value="true" />
+      <EXTENSION ID="PythonCoverageRunConfigurationExtension" runner="coverage.py" />
+      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/app.py" />
+      <option name="PARAMETERS" value="" />
+      <option name="SHOW_COMMAND_LINE" value="false" />
+      <option name="EMULATE_TERMINAL" value="false" />
+      <option name="MODULE_MODE" value="false" />
+      <option name="REDIRECT_INPUT" value="false" />
+      <option name="INPUT_FILE" value="" />
+      <method v="2" />
+    </configuration>
     <configuration name="csvReaderForAreano" type="PythonConfigurationType" factoryName="Python" temporary="true" nameIsGenerated="true">
       <module name="miniProject_1week" />
       <option name="INTERPRETER_OPTIONS" value="" />
@@ -89,28 +102,6 @@
       <option name="ADD_SOURCE_ROOTS" value="true" />
       <EXTENSION ID="PythonCoverageRunConfigurationExtension" runner="coverage.py" />
       <option name="SCRIPT_NAME" value="$PROJECT_DIR$/service/util/csvReaderForAreano.py" />
-      <option name="PARAMETERS" value="" />
-      <option name="SHOW_COMMAND_LINE" value="false" />
-      <option name="EMULATE_TERMINAL" value="false" />
-      <option name="MODULE_MODE" value="false" />
-      <option name="REDIRECT_INPUT" value="false" />
-      <option name="INPUT_FILE" value="" />
-      <method v="2" />
-    </configuration>
-    <configuration name="formatConvertor" type="PythonConfigurationType" factoryName="Python" temporary="true" nameIsGenerated="true">
-      <module name="miniProject_1week" />
-      <option name="INTERPRETER_OPTIONS" value="" />
-      <option name="PARENT_ENVS" value="true" />
-      <envs>
-        <env name="PYTHONUNBUFFERED" value="1" />
-      </envs>
-      <option name="SDK_HOME" value="" />
-      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$/service/api/sensibletemperature" />
-      <option name="IS_MODULE_SDK" value="true" />
-      <option name="ADD_CONTENT_ROOTS" value="true" />
-      <option name="ADD_SOURCE_ROOTS" value="true" />
-      <EXTENSION ID="PythonCoverageRunConfigurationExtension" runner="coverage.py" />
-      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/service/api/sensibletemperature/formatConvertor.py" />
       <option name="PARAMETERS" value="" />
       <option name="SHOW_COMMAND_LINE" value="false" />
       <option name="EMULATE_TERMINAL" value="false" />
@@ -187,11 +178,11 @@
     </configuration>
     <recent_temporary>
       <list>
+        <item itemvalue="Python.app" />
         <item itemvalue="Python.tempService" />
         <item itemvalue="Python.csvReaderForAreano" />
         <item itemvalue="Python.sensibleTemperatureImpl" />
         <item itemvalue="Python.shortTermWeatherForecastImpl" />
-        <item itemvalue="Python.formatConvertor" />
       </list>
     </recent_temporary>
   </component>
@@ -210,7 +201,7 @@
       <workItem from="1657585646753" duration="22961000" />
       <workItem from="1657635495752" duration="10690000" />
       <workItem from="1657649377086" duration="3373000" />
-      <workItem from="1657672282777" duration="1755000" />
+      <workItem from="1657672282777" duration="2199000" />
     </task>
     <servers />
   </component>
@@ -236,7 +227,7 @@
     <SUITE FILE_PATH="coverage/miniProject_1week$shortTermWeatherForecastImpl.coverage" NAME="shortTermWeatherForecastImpl 커버리지 결과" MODIFIED="1657672526416" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/service/api/shorttermforecast" />
     <SUITE FILE_PATH="coverage/miniProject_1week$sensibleTemperatureImpl.coverage" NAME="sensibleTemperatureImpl 커버리지 결과" MODIFIED="1657672603289" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/service/api/sensibletemperature" />
     <SUITE FILE_PATH="coverage/miniProject_1week$csvReaderForAreano.coverage" NAME="csvReaderForAreano 커버리지 결과" MODIFIED="1657674022890" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/service/util" />
-    <SUITE FILE_PATH="coverage/miniProject_1week$app.coverage" NAME="app 커버리지 결과" MODIFIED="1657642600654" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
+    <SUITE FILE_PATH="coverage/miniProject_1week$app.coverage" NAME="app 커버리지 결과" MODIFIED="1657674512176" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
     <SUITE FILE_PATH="coverage/miniProject_1week$sensibleTemperatureImpl__1_.coverage" NAME="sensibleTemperatureImpl (1) 커버리지 결과" MODIFIED="1657635636694" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/service/api/sensibletemperature" />
     <SUITE FILE_PATH="coverage/miniProject_1week$userService.coverage" NAME="userService 커버리지 결과" MODIFIED="1657638941998" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/service" />
     <SUITE FILE_PATH="coverage/miniProject_1week$formatConvertor.coverage" NAME="formatConvertor 커버리지 결과" MODIFIED="1657650091580" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/service/api/sensibletemperature" />
