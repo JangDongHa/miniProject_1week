@@ -94,6 +94,7 @@ function sign_up() {
 
 }
 
+
 function sign_out() {
     // user의 token을 지우면 로그아웃! jquery에서 쿠키를 삭제하는 함수.
     $.removeCookie('mytoken', {path: '/'});
@@ -101,7 +102,6 @@ function sign_out() {
     // 로그아웃 후 login 페이지로 보내준다.
     window.location.href = "/login"
 }
-
 function getUserInfo(execute) {
     $.ajax({
         type: "GET",
@@ -112,6 +112,3 @@ function getUserInfo(execute) {
         }
     });
 }
-
-
-
