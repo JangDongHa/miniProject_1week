@@ -26,5 +26,3 @@ def get_address_from_ip():
     ipdto = ipDTO(ip_data_type_json)
 
     lat, lon = ipdto.get_lat_lon()
-
-    print(areaXYDao.findareaXYBylatlon(lat, lon))

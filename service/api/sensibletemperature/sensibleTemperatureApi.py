@@ -22,6 +22,5 @@ class sensibleTemperatureApi:
     def request_api(self):
         r = requests.get(self.url, params=self.data)
         response = r.json()
-        print(r.json())
 
         return response

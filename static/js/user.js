@@ -30,7 +30,7 @@ function sign_in() {
     }
     $.ajax({
         type: "POST",
-        url: "/login",
+        url: "/api/login",
         data: {
             username_give: username,
             password_give: password
@@ -84,7 +84,7 @@ function sign_up() {
     }
     $.ajax({
         type: "POST",
-        url: "/sign_up",
+        url: "/api/sign_up",
         data: {
             name_give: name,
             password_give: password,
@@ -135,6 +135,7 @@ function postUserAddr() {
         },
         success: function (response) {
             console.log(response)
+            window.location.href='/search'
         }
     });
 }

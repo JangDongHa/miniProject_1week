@@ -123,7 +123,7 @@
       function list_shelter() {
                 $.ajax({
                     type: "GET",
-                    url: '/shelter',
+                    url: '/api/search/shelter',
                     data: {},
                     success: function (response) {
                       let rows = response["shelter_info"]
@@ -227,7 +227,7 @@
       function currentLocation(){
         $.ajax({
                     type: "GET",
-                    url: '/current',
+                    url: '/api/search/shelter/current',
                     data: {},
                     success: function (response) {
 
