@@ -196,8 +196,13 @@
 
           $('#shelter-detail').empty();
 
-          console.log(startXPoint, startYPoint, startAddress)
-          console.log(endXPoint, endYPoint,endAddress)
+
+
+          if (endXPoint == 0 || endYPoint == 0){
+              console.log('get in')
+              endXPoint = detailInfo['la'];
+              endYPoint = detailInfo['lo'];
+          }
 
           let temp_html = `
                     <div id="modal-${i}">
@@ -212,7 +217,7 @@
                         <p>에어컨보유대수 : ${detailInfo['colrHoldArcndtn']}</p>
                         <p>야간개방 : ${detailInfo['chckMatterNightOpnAt']}</p>
                         <p>휴일개방 : ${detailInfo['chckMatterWkendHdayOpnAt']}</p>
-                        <p>좌표 : ${detailInfo['xcord']} , ${detailInfo['ycord']}</p>
+                        <p>좌표 : ${endXPoint} , ${endYPoint}</p>
 
                         <h2>지도    <a class="btn btn-success btn-lg py-2 px-3 mb-2 mb-md-0 me-md-2" href="http://map.naver.com/index.nhn?slng=${startXPoint}&slat=${startYPoint}&stext=${startAddress}&elng=${endXPoint}&elat=${endYPoint}&etext=${endAddress}&menu=route&pathType=1" target="_blank">지도로 길찾기</a></h2>
 
@@ -353,7 +358,7 @@
                           <div class="card-body px-4 py-5 px-md-5">
                               <h1 class="display-3 fw-bold ls-tight mb-4"> <a href="/"> <img src="/static/img/logo.png" alt="" width="160" height="100" class="d-inline-block align-text-top" style="border-radius: 20px">  </a><br> <span>검색결과</span> </h1>
                               <span style="font-size: 40px">현재 주소 : <span id="current-address"> </span></span><br>
-                              <a class="btn btn-success btn-lg py-3 px-4 mb-2 mb-md-0 me-md-2" href="#" role="button" style="">주소 변경</a>
+                              <a class="btn btn-success btn-lg py-3 px-4 mb-2 mb-md-0 me-md-2" href="/" role="button" style="">홈으로</a>
 
                               <div id="shelterList">
                                 <img src='/static/img/loading.gif' style="width: 200px; height: 200px;">

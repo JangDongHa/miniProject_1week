@@ -6,6 +6,7 @@ def start(app, data=''):
     @app.route('/api/search/shelter', methods=['GET'])
     def getShlter():
         myData = shelterService.get_shlter_data(request) # shelter_info
+        print ('my data is ', myData)
         return jsonify({'shelter_info': myData})
 
     @app.route('/api/search/shelter/current', methods=["GET"])
