@@ -58,12 +58,12 @@
                     <label class="form-label" for="form3Example3cg">주소칸을 클릭해주세요!!</label>
                   </div>
 
-                  <div class="form-check d-flex justify-content-center mb-5">
-                    <input class="form-check-input me-2" type="checkbox" value="" id="form2Example3cg" />
-                    <label class="form-check-label" for="form2Example3g">
-                      I agree all statements in <a href="#!" class="text-body"><u>Terms of service</u></a>
-                    </label>
-                  </div>
+{#                  <div class="form-check d-flex justify-content-center mb-5">#}
+{#                    <input class="form-check-input me-2" type="checkbox" value="" id="form2Example3cg" />#}
+{#                    <label class="form-check-label" for="form2Example3g">#}
+{#                      I agree all statements in <a href="#!" class="text-body"><u>Terms of service</u></a>#}
+{#                    </label>#}
+{#                  </div>#}
 
                   <div class="d-flex justify-content-center">
                     <button type="button"
@@ -87,13 +87,9 @@
   {% include 'footer.html' %}
 </body>
 <script>
-
   document.getElementById("address_kakao").addEventListener("click", function(){
       new daum.Postcode({
               oncomplete: function(data) {
-                  console.log(data.jibunAddress) // 구 지번
-                  console.log(data.address) // 신 지번
-                  console.log($('#address_kakao').val())
                   $('#address_kakao').val(data.address)
               }
         }).open();

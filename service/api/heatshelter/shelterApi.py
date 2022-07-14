@@ -32,7 +32,6 @@ def get_all_equptype_data(data):
     data['equptype'] = '010'
     r_list.append(connection(url, data))
 
-    print(r_list)
     new_r_list = drop_none_result_data(r_list)
     return make_many_to_one_r_list(new_r_list)
 

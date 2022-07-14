@@ -1,13 +1,13 @@
-from flask import Flask, render_template, request, jsonify
+from flask import Flask
 
-from controller import userController, mainController, weatherController, searchController, shelterController
+from controller import userController, mainController, weatherController, searchController
 
 app = Flask(__name__)
 SECRET_KEY = 'SPARTA'
 userController.start(app)
 mainController.start(app)
 weatherController.start(app)
-shelterController.start(app)
+searchController.start(app)
 
 
 if __name__ == '__main__':
