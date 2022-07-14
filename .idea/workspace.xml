@@ -3,27 +3,10 @@
   <component name="ChangeListManager">
     <list default="true" id="bdcf9157-6d63-478f-b259-e18501117e82" name="변경" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app.py" beforeDir="false" afterPath="$PROJECT_DIR$/app.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/config.py" beforeDir="false" afterPath="$PROJECT_DIR$/config.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/controller/mainController.py" beforeDir="false" afterPath="$PROJECT_DIR$/controller/mainController.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/controller/searchController.py" beforeDir="false" afterPath="$PROJECT_DIR$/controller/searchController.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/controller/shelterController.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/controller/userController.py" beforeDir="false" afterPath="$PROJECT_DIR$/controller/userController.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/controller/weatherController.py" beforeDir="false" afterPath="$PROJECT_DIR$/controller/weatherController.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/service/api/heatshelter/shelterApi.py" beforeDir="false" afterPath="$PROJECT_DIR$/service/api/heatshelter/shelterApi.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/service/api/sensibletemperature/formatConvertor.py" beforeDir="false" afterPath="$PROJECT_DIR$/service/api/sensibletemperature/formatConvertor.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/service/api/sensibletemperature/sensibleTemperatureApi.py" beforeDir="false" afterPath="$PROJECT_DIR$/service/api/sensibletemperature/sensibleTemperatureApi.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/service/ipService.py" beforeDir="false" afterPath="$PROJECT_DIR$/service/ipService.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/service/shelterService.py" beforeDir="false" afterPath="$PROJECT_DIR$/service/shelterService.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/service/tempService.py" beforeDir="false" afterPath="$PROJECT_DIR$/service/tempService.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/service/userService.py" beforeDir="false" afterPath="$PROJECT_DIR$/service/userService.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/service/util/definitionRisk.py" beforeDir="false" afterPath="$PROJECT_DIR$/service/util/definitionRisk.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/static/js/user.js" beforeDir="false" afterPath="$PROJECT_DIR$/static/js/user.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/templates/index.html" beforeDir="false" afterPath="$PROJECT_DIR$/templates/index.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/templates/login.html" beforeDir="false" afterPath="$PROJECT_DIR$/templates/login.html" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/templates/register.html" beforeDir="false" afterPath="$PROJECT_DIR$/templates/register.html" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/templates/search.html" beforeDir="false" afterPath="$PROJECT_DIR$/templates/search.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/templates/user.html" beforeDir="false" afterPath="$PROJECT_DIR$/templates/user.html" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -86,7 +69,7 @@
       <recent name="C:\Users\jdh33\OneDrive\Desktop\SpartaCoding\miniProject_1week\service\api" />
     </key>
   </component>
-  <component name="RunManager" selected="Flask 서버.Flask (app.py)">
+  <component name="RunManager" selected="Python.shelterApi">
     <configuration name="app" type="PythonConfigurationType" factoryName="Python" temporary="true" nameIsGenerated="true">
       <module name="miniProject_1week" />
       <option name="INTERPRETER_OPTIONS" value="" />
@@ -239,7 +222,7 @@
       <workItem from="1657649377086" duration="3373000" />
       <workItem from="1657672282777" duration="19224000" />
       <workItem from="1657753845096" duration="510000" />
-      <workItem from="1657779587686" duration="3557000" />
+      <workItem from="1657779587686" duration="12202000" />
     </task>
     <servers />
   </component>
@@ -265,9 +248,9 @@
     <SUITE FILE_PATH="coverage/miniProject_1week$app.coverage" NAME="app 커버리지 결과" MODIFIED="1657748545463" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
     <SUITE FILE_PATH="coverage/miniProject_1week$sensibleTemperatureImpl__1_.coverage" NAME="sensibleTemperatureImpl (1) 커버리지 결과" MODIFIED="1657635636694" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/service/api/sensibletemperature" />
     <SUITE FILE_PATH="coverage/miniProject_1week$userService.coverage" NAME="userService 커버리지 결과" MODIFIED="1657638941998" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/service" />
-    <SUITE FILE_PATH="coverage/miniProject_1week$Flask__app_py_.coverage" NAME="Flask (app.py) 커버리지 결과" MODIFIED="1657782889064" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
+    <SUITE FILE_PATH="coverage/miniProject_1week$Flask__app_py_.coverage" NAME="Flask (app.py) 커버리지 결과" MODIFIED="1657790021287" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
     <SUITE FILE_PATH="coverage/miniProject_1week$csvReaderForAreano__1_.coverage" NAME="csvReaderForAreano (1) 커버리지 결과" MODIFIED="1657642284056" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/service/util" />
-    <SUITE FILE_PATH="coverage/miniProject_1week$shelterApi.coverage" NAME="shelterApi 커버리지 결과" MODIFIED="1657749476006" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/service/api/heatshelter" />
+    <SUITE FILE_PATH="coverage/miniProject_1week$shelterApi.coverage" NAME="shelterApi 커버리지 결과" MODIFIED="1657786179321" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/service/api/heatshelter" />
     <SUITE FILE_PATH="coverage/miniProject_1week$test.coverage" NAME="test 커버리지 결과" MODIFIED="1657638982007" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/service" />
     <SUITE FILE_PATH="coverage/miniProject_1week$shortTermWeatherForecastApi.coverage" NAME="shortTermWeatherForecastImpl 커버리지 결과" MODIFIED="1657604574491" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/service/api" />
     <SUITE FILE_PATH="coverage/miniProject_1week$shortTermWeatherForecastImpl.coverage" NAME="shortTermWeatherForecastImpl 커버리지 결과" MODIFIED="1657725262409" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/service/api/shorttermforecast" />

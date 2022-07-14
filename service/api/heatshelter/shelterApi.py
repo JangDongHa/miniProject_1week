@@ -52,7 +52,10 @@ def make_many_to_one_r_list(new_r_list):
         for index in range (1, length):
             for value in new_r_list[index]:
                 new_r_list[0].append(value)
-    return new_r_list[0]
+    try:
+        return new_r_list[0]
+    except:
+        return []
 
 
 def change_json_key_name(shelter_info):
@@ -70,6 +73,7 @@ def change_json_value_name(shelter_info, key):
 
 def update_json_i_want(result, *args): # args : pop 하려는 대상
     try:
+        print('result is', result)
         for shelter_info in result:
             for arg in args:
                 shelter_info.pop(arg)
@@ -80,9 +84,17 @@ def update_json_i_want(result, *args): # args : pop 하려는 대상
     except:
         try:
             result[0][0]
+            print('result is', result[0][0])
+            for shelter_info in result[0][0]:
+                for arg in args:
+                    shelter_info.pop(arg)
+                change_json_key_name(shelter_info)
+                change_json_value_name(shelter_info, 'equptype')
             return result[0]
         except:
-            return result
+            print('no result')
+            result = {'msg': '검색 결과가 없습니다.'}
+            return {'msg': '검색 결과가 없습니다.'}
 
 def get_need_result(result):
     return update_json_i_want(result, 'restSeqNo', 'year', 'creDttm', 'updtDttm', 'areaNm',
@@ -93,6 +105,7 @@ def get_need_result(result):
 
 
 if __name__ == '__main__':
-    data = setting_data('1123051000')
+    data = setting_data('4717041000')
     result = get_all_equptype_data(data) # 형태 : list({},{},{}....)
     myData = get_need_result(result) # 그 중에서 필요한 데이터만 정제한 것
+    print(myData)

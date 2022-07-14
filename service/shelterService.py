@@ -34,8 +34,12 @@ def current_location():
     r = requests.get(f"https://naveropenapi.apigw.ntruss.com/map-geocode/v2/geocode?query={address}",
                      headers=get_headers())
     response = r.json()
-    x = response["addresses"][0]["x"]
-    y = response["addresses"][0]["y"]
+    try: #네이버 검색 결과 없을 떄
+        x = response["addresses"][0]["x"]
+        y = response["addresses"][0]["y"]
+    except:
+        x = 0
+        y = 0
 
     current_location = {
         'address': address,
