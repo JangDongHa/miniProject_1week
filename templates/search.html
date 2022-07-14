@@ -1,0 +1,381 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>도심속휴식터</title>
+
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
+    <script type="text/javascript"
+                src="https://openapi.map.naver.com/openapi/v3/maps.js?ncpClientId=6rjx5nfk5b"></script>
+    <!-- <script type="text/javascript"
+                src="https://openapi.map.naver.com/openapi/v3/maps.js?ncpClientId=6rjx5nfk5b&submodules=geocoder"></script> -->
+
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script src="static/js/user.js"></script>
+    <script>
+        function execute(response) {
+            let temp_html = `<div><span style="font-size: 40px">현재 주소 : ${response['userInfo']['address']}</span></div>`
+            $('#here').append(temp_html)
+        }
+        getUserInfo(execute)
+
+
+    </script>
+    <link href="https://fonts.googleapis.com/css2?family=Nanum+Pen+Script&display=swap" rel="stylesheet">
+    <style>
+        * {
+            font-family: 'Nanum Pen Script', cursive;
+        }
+
+        .rounded-t-5 {
+            border-top-left-radius: 0.5rem;
+            border-top-right-radius: 0.5rem;
+        }
+
+        @media (min-width: 992px) {
+            .rounded-tr-lg-0 {
+                border-top-right-radius: 0;
+            }
+
+            .rounded-bl-lg-5 {
+                border-bottom-left-radius: 0.5rem;
+            }
+        }
+
+        button {
+            background-color: #F9B514;
+            padding: 5px 10px;
+            border-radius: 4px;
+            cursor: pointer;
+        }
+
+        .modal {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .modal .bg {
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.6);
+        }
+
+        .modalBox {
+            position: absolute;
+            background-color: #fff;
+            width: 400px;
+            height: 200px;
+            padding: 15px;
+        }
+
+        .modalBox button {
+            display: block;
+            width: 80px;
+            margin: 0 auto;
+        }
+
+        .hidden {
+            display: none;
+        }
+
+        #map {
+                width: 100%;
+                height: 400px;
+            }
+
+
+    </style>
+  <script>
+
+
+      // let x_cen;
+      // let y_cen;
+      let map;
+      let marker;
+      let detailInfo;
+      let startXPoint;
+      let startYPoint;
+      let startAddress;
+
+
+      let url = "http://map.naver.com/index.nhn?slng=126.8966655 (출발좌표X)&slat=37.4830969 (출발좌표Y)&stext=출발지이름&elng=127.0276368 (도착좌표X)&elat=37.4979502 (도착좌표Y)&etext=도착지이름&menu=route&pathType=1"
+
+
+
+      $(document).ready(function () {
+                  currentLocation();
+
+                  // mark_location(x_cen, y_cen)
+                  // make_marker(x_cen, y_cen)
+
+
+              })
+
+      function list_shelter() {
+                $.ajax({
+                    type: "GET",
+                    url: '/api/search/shelter',
+                    data: {},
+                    success: function (response) {
+                      let rows = response["shelter_info"]
+                      //console.log(rows[0]['shelter_name'])
+                      console.log (rows)
+                        $("#shelterList").empty()
+
+                      for (let i = 0; i < rows.length; i++) {
+                        let shelterName = rows[i]['restname']
+                        let shelterAddress = rows[i]['restaddr']
+                        let shelterMaxPeople = rows[i]['usePsblNmpr']
+                        let shelterType = rows[i]['equptype']
+                        let xcord = rows[i]['xcord']
+                        let ycord = rows[i]['ycord']
+                        let chckMatterWkendHdayOpnAt = rows[i]['chckMatterWkendHdayOpnAt']
+                        detailInfo = rows
+
+                        console.log(shelterName)
+
+                        let temp_html = `<div class="card"  style="width: 32rem; display: flex; justify-content: center; margin: auto; margin-top: 10px">
+                                          <div class="card-body" data-bs-toggle="modal" data-bs-target="#exampleModalCenter" onclick="detailModal(${i}, detailInfo[${i}])">
+                                            <h5 class="card-title"  >${shelterName}</h5>
+                                            <p class="card-text">주소 : ${shelterAddress}</p>
+                                            <p class="card-text">시설 유형 : ${shelterType}</p>
+                                            <p class="card-text">이용가능인원 : ${shelterMaxPeople}</p>
+                                            <p class="card-text">휴일개방 : ${chckMatterWkendHdayOpnAt}</p>
+
+                                          </div>
+                                      </div>`
+
+
+
+
+                        $('#shelterList').append(temp_html);
+
+                      // y_cen = response['ycord']
+                      // x_cen = response['xcord']
+                      // console.log(y_cen, x_cen)
+                      // mark_location(y_cen,x_cen)
+                      // make_marker(y_cen,x_cen)
+                    }
+                  }
+                });
+
+              }
+
+      function codeChange(x,y){
+        //console.log(x,y)
+        let x_cen = x;
+        let y_cen = y;
+
+        //let new_location = new naver.maps.LatLng(x_cen, y_cen);
+        // map.setCenter(new_location);
+        //console.log(x_cen,y_cen)
+        mark_location(x_cen, y_cen)
+        make_marker(x_cen, y_cen)
+      }
+
+
+      function detailModal(i, detailInfo) {
+
+          codeChange(detailInfo['xcord'],detailInfo['ycord'])
+
+          console.log(detailInfo['xcord']);
+
+
+          let endXPoint = detailInfo['xcord'];
+          let endYPoint = detailInfo['ycord'];
+          let endAddress = detailInfo['restaddr'];
+
+          $('#shelter-detail').empty();
+
+
+
+          if (endXPoint == 0 || endYPoint == 0){
+              console.log('get in')
+              endXPoint = detailInfo['la'];
+              endYPoint = detailInfo['lo'];
+          }
+
+          let temp_html = `
+                    <div id="modal-${i}">
+
+                        <h2>${detailInfo['restname']}</h2>
+
+                        <h3>상세정보</h3>
+                        <p>주소 : ${detailInfo['restaddr']}</p>
+                        <p>시설 유형 : ${detailInfo['equptype']}</p>
+                        <p>이용가능인원 : ${detailInfo['usePsblNmpr']}</p>
+                        <p>선풍기보유대수 : ${detailInfo['colrHoldElefn']}</p>
+                        <p>에어컨보유대수 : ${detailInfo['colrHoldArcndtn']}</p>
+                        <p>야간개방 : ${detailInfo['chckMatterNightOpnAt']}</p>
+                        <p>휴일개방 : ${detailInfo['chckMatterWkendHdayOpnAt']}</p>
+                        <p>좌표 : ${endXPoint} , ${endYPoint}</p>
+
+                        <h2>지도    <a class="btn btn-success btn-lg py-2 px-3 mb-2 mb-md-0 me-md-2" href="http://map.naver.com/index.nhn?slng=${startXPoint}&slat=${startYPoint}&stext=${startAddress}&elng=${endXPoint}&elat=${endYPoint}&etext=${endAddress}&menu=route&pathType=1" target="_blank">지도로 길찾기</a></h2>
+
+                    </div>
+
+                  `
+
+                  $('#shelter-detail').append(temp_html);
+      }
+
+
+      function currentLocation(){
+        $.ajax({
+                    type: "GET",
+                    url: '/api/search/shelter/current',
+                    data: {},
+                    success: function (response) {
+
+                      $('#current-address').empty();
+
+                      let rows = response["current_location"]
+                      console.log(rows)
+
+
+
+                      let address = rows['address']
+                      let xcord = rows['xcord']
+                      let ycord = rows['ycord']
+
+                      // function giveModal(a){
+                      //   return parseFloat(a)
+                      // }
+                      // function giveModal(b){
+                      //   return parseFloat(b)
+                      // }
+
+                      departX = function(x){return parseFloat(x)}
+                      departY = function(y){return parseFloat(y)}
+                      departAddr = function(a){return address}
+
+                      // console.log("현재좌표  " + departX(xcord));
+
+                      startXPoint = departX(xcord);
+                      startYPoint = departY(ycord);
+                      startAddress = departAddr(address);
+
+
+
+
+
+                      console.log(address,xcord,ycord)
+
+                      $('#current-address').append(address);
+                      list_shelter();
+                    }
+                });
+
+      }
+
+
+
+
+      function mark_location(x_cen, y_cen){
+          $("#map").html("")
+          map = new naver.maps.Map('map', {
+                      center: new naver.maps.LatLng(x_cen, y_cen),
+                      zoom: 12,
+                      zoomControl: true,
+                      zoomControlOptions: {
+                      style: naver.maps.ZoomControlStyle.SMALL,
+                      position: naver.maps.Position.TOP_RIGHT
+                    },
+                  });
+          var $window = $(window);
+          var size = new naver.maps.Size(450, 450);
+          map.setSize(size);
+
+      }
+
+      function make_marker(x_cen, y_cen){
+          marker = new naver.maps.Marker({
+                    position: new naver.maps.LatLng(x_cen, y_cen),
+                    map: map
+                });
+      }
+
+
+  </script>
+
+</head>
+<body>
+
+{% include 'header.html' %}
+</div>
+<div>
+
+    <div data-draggable="true" style="position: relative;" draggable="false" class="">
+        <!---->
+        <!---->
+        <section draggable="false" class="overflow-hidden pt-0" data-v-271253ee="">
+            <section class="mb-10">
+                <!-- Background image -->
+
+                <div class="p-5 text-center bg-image" style="background-image: url('/static/img/indexBackground.jpg'); height: 500px; background-size: cover; background-position: 50% 50%; background-color: rgba(0, 0, 0, 0);"></div> <!-- Background image -->
+
+
+
+                  <!-- Modal -->
+                  <div class="modal fade" id="exampleModalCenter" tabindex="-1" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+                      <div class="modal-dialog modal-dialog-centered">
+                          <div class="modal-content">
+                              <div class="modal-header">
+                                  <h5 class="modal-title" id="exampleModalLabel">상세 정보 보기</h5>
+                                  <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                              </div>
+                              <div class="modal-body">
+
+                                  <div class="mb-3" id="shelter-detail">
+
+                                  </div>
+                                  <div id="map">
+
+                                  </div>
+
+                              </div>
+                              <div class="modal-footer" style="display: flex; justify-content: center; margin: auto;">
+                                  <button  type="button" class="btn btn-primary" data-bs-dismiss="modal">닫기</button>
+                              </div>
+                          </div>
+                      </div>
+                  </div>
+
+
+
+
+                    <div class="container">
+                      <div class="card mx-4 mx-md-5 text-center shadow-5-strong" style=" margin-top: -170px; background: hsla(0, 0%, 100%, 0.7); backdrop-filter: blur(30px); ">
+                          <div class="card-body px-4 py-5 px-md-5">
+                              <h1 class="display-3 fw-bold ls-tight mb-4"> <a href="/"> <img src="/static/img/logo.png" alt="" width="160" height="100" class="d-inline-block align-text-top" style="border-radius: 20px">  </a><br> <span>검색결과</span> </h1>
+                              <span style="font-size: 40px">현재 주소 : <span id="current-address"> </span></span><br>
+                              <a class="btn btn-success btn-lg py-3 px-4 mb-2 mb-md-0 me-md-2" href="/" role="button" style="">홈으로</a>
+
+                              <div id="shelterList">
+                                <img src='/static/img/loading.gif' style="width: 200px; height: 200px;">
+
+                              </div>
+                          </div>
+                      </div>
+                  </div>
+              </section>
+          </section>
+          <!---->
+      </div> <!-- First Component -->
+  </div>
+    {% include 'footer.html' %}
+
+
+
+
+  </body>
+</html>
