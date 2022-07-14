@@ -40,7 +40,7 @@ def get_sensible_temp_present(time_range):
     convertor.setData(response)  # 컨버터 등록
     response = convertor.execute()  # 컨버터 실행
 
-    print(convertor.get_predict_list_data(time_range, today))
+    return convertor.get_predict_list_data(time_range, today)
 
 
 def get_info_from_address(address):  # 구, 동 으로 정보를 찾아냄. 정보가 없으면 구로만 검색한 결과를 뿌려줌

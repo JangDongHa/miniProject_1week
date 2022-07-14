@@ -16,9 +16,7 @@
         function execute(response) {
             let temp_html = `<form><div>
                                     <label for="exampleInputEmail1" class="form-label">${response['userInfo']['address']}가 맞으신가요?</label>
-                                     <input type="email" class="form-control" id="address_kakao"
-                                               aria-describedby="emailHelp" value="${response['userInfo']['address']}"
-                                               readonly>
+                                     <input type="email" id="address_kakao" class="form-control form-control-lg" onclick="getDaumApi()" value="${response['userInfo']['address']}" readonly>
                                      <div id="emailHelp" class="form-text">아니라면 클릭하여 바꿔주세요!</div>
                                       </div></form>`
             $('#here').append(temp_html)
@@ -149,37 +147,37 @@
                 </div>
 
                 <!-- Modal -->
-                <div class="modal fade" id="exampleModalCenter2" tabindex="-1" aria-labelledby="exampleModalCenterTitle"
-                     aria-hidden="true">
-                    <div class="modal-dialog modal-dialog-centered">
-                        <div class="modal-content">
-                            <div class="modal-header">
-                                <h5 class="modal-title" id="exampleModalLabel2">쉼터 종류를 확인해주세요!</h5>
-                                <button type="button" class="btn-close" data-bs-dismiss="modal"
-                                        aria-label="Close"></button>
-                            </div>
-                            <div class="modal-body">
-                                <form>
-                                    <div class="mb-3">
-                                        <label for="exampleInputEmail1" class="form-label">찾으시는 쉼터의 타입을 선택해주세요!</label>
-                                        <select class="form-select form-select-lg mb-3"
-                                                aria-label=".form-select-lg example">
-                                            <option selected>선택</option>
-                                            <option value="1">실내</option>
-                                            <option value="2">야외</option>
-                                        </select>
-                                    </div>
-                                </form>
-                            </div>
-                            <div class="modal-footer">
-                                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">취소</button>
-                                <button type="submit" class="btn btn-primary" data-bs-dismiss="modal"
-                                        onclick="window.location.href='/search'">선택
-                                </button>
-                            </div>
-                        </div>
-                    </div>
-                </div>
+{#                <div class="modal fade" id="exampleModalCenter2" tabindex="-1" aria-labelledby="exampleModalCenterTitle"#}
+{#                     aria-hidden="true">#}
+{#                    <div class="modal-dialog modal-dialog-centered">#}
+{#                        <div class="modal-content">#}
+{#                            <div class="modal-header">#}
+{#                                <h5 class="modal-title" id="exampleModalLabel2">쉼터 종류를 확인해주세요!</h5>#}
+{#                                <button type="button" class="btn-close" data-bs-dismiss="modal"#}
+{#                                        aria-label="Close"></button>#}
+{#                            </div>#}
+{#                            <div class="modal-body">#}
+{#                                <form>#}
+{#                                    <div class="mb-3">#}
+{#                                        <label for="exampleInputEmail1" class="form-label">찾으시는 쉼터의 타입을 선택해주세요!</label>#}
+{#                                        <select class="form-select form-select-lg mb-3"#}
+{#                                                aria-label=".form-select-lg example">#}
+{#                                            <option selected>선택</option>#}
+{#                                            <option value="1">실내</option>#}
+{#                                            <option value="2">야외</option>#}
+{#                                        </select>#}
+{#                                    </div>#}
+{#                                </form>#}
+{#                            </div>#}
+{#                            <div class="modal-footer">#}
+{#                                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">취소</button>#}
+{#                                <button type="submit" class="btn btn-primary" data-bs-dismiss="modal"#}
+{#                                        onclick="window.location.href='/search'">선택#}
+{#                                </button>#}
+{#                            </div>#}
+{#                        </div>#}
+{#                    </div>#}
+{#                </div>#}
 
                 <div class="container">
                     <div class="card mx-4 mx-md-5 text-center shadow-5-strong"
@@ -301,7 +299,7 @@
                         <h6 class="text-primary mb-3">Back-end Developer</h6>
                         <p class="px-xl-3">
                             <i class="fas fa-quote-left pe-2"></i>
-                            <span>프로젝트 중에 자신의 소개글을 적어서 저에게 보내주세요.</span>
+                            <span>오늘보다 내일 더 발전할 백엔드 개발자 유은정입니다. 더 나은 개발 프로세스와 코드가 무엇인지 고민하며 발전하려 노력하고 있습니다.</span>
                         </p>
                         <ul class="list-unstyled d-flex justify-content-center mb-0">
                             <li><i class="fas fa-star fa-sm text-warning"></i></li>
@@ -320,7 +318,7 @@
                         <h6 class="text-primary mb-3">Back-end Developer</h6>
                         <p class="px-xl-3">
                             <i class="fas fa-quote-left pe-2"></i>
-                            <span>프로젝트 중에 자신의 소개글을 적어서 저에게 보내주세요.</span>
+                            <span>아키텍쳐를 좋아하고 백엔드 설계를 좋아하는 백수이자 학생입니다. 이번 프로젝트 하면서 3일동안 다들 많이 고생하셨는데 재밌게 구경하시고 가셨으면 좋겠습니다. 앞으로 남은 기간동안 포기하지 않고 열심히 하겠습니다.</span>
                         </p>
                         <ul class="list-unstyled d-flex justify-content-center mb-0">
                             <li><i class="fas fa-star fa-sm text-warning"></i></li>
@@ -339,7 +337,7 @@
                         <h6 class="text-primary mb-3">Web Developer</h6>
                         <p class="px-xl-3">
                             <i class="fas fa-quote-left pe-2"></i>
-                            <span>프로젝트 중에 자신의 소개글을 적어서 저에게 보내주세요.</span>
+                            <span>프론트에 관심 있고 웹개발을 좋아하는 미래 개발자입니다. 이번 프로젝트 에서는 search 페이지의 쉼터 리스트에 해당하는 정보값을 가져오는 작업을 맡았습니다. 이번 프로젝트를 통해 많은 시행착오를 겪으며 협업하는법, 문제를 해결하는 방법을 배웠습니다. 앞으로 남은 항해 기간 동안 더욱 성장하는 개발자가 되겠습니다</span>
                         </p>
                         <ul class="list-unstyled d-flex justify-content-center mb-0">
                             <li><i class="fas fa-star fa-sm text-warning"></i></li>
@@ -405,17 +403,31 @@
 {% include 'footer.html' %}
 </body>
 <script>
+    let loading = false
 
-    document.getElementById("address_kakao").addEventListener("click", function () {
+    function loading_complete(){
+        loading = false
+    }
+
+    if (!loading){
+        document.getElementById("address_kakao").addEventListener("click", function () {
+        console.log('test')
         new daum.Postcode({
             oncomplete: function (data) {
-                console.log(data.jibunAddress) // 구 지번
-                console.log(data.address) // 신 지번
-                console.log($('#address_kakao').val())
                 $('#address_kakao').val(data.address)
             }
         }).open();
     });
+    }
+
+    function getDaumApi(){
+        new daum.Postcode({
+            oncomplete: function (data) {
+                $('#address_kakao').val(data.address)
+            }
+        }).open();
+    }
+
 
 </script>
 </html>

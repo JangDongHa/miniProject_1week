@@ -83,7 +83,6 @@ class formatConvertor:
             dateTime = self.datetime_add_hHours(dateTime, 1)
             dateStr = self.datetime_to_string(dateTime)
             temp = self.data.get(dateStr) # 온도
-            print('dateStr',dateStr)
             list_data.append()
 
         return list_data

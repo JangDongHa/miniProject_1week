@@ -1,6 +1,4 @@
-safelist = ['없음', '맑음']
-middleList = ['흐림']
-dangerTemp = 25
+from config import dangerTemp, middleList, safelist
 
 def check_risk(data):
     if data in middleList:

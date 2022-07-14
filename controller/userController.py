@@ -45,12 +45,12 @@ def start(app, data=''):
         else:
             return render_template('register.html')
 
-    @app.route('/sign_up', methods=['POST'])
+    @app.route('/api/sign_up', methods=['POST'])
     def sign_up():
         userSignupJsonify = userService.user_sign_up(request)
         return userSignupJsonify
 
-    @app.route('/login', methods=['POST'])
+    @app.route('/api/login', methods=['POST'])
     def sign_in():
         userSigninResultJsonify = userService.user_sign_in(request)
         return userSigninResultJsonify
@@ -63,7 +63,6 @@ def start(app, data=''):
     @app.route('/api/getStatus', methods=['GET'])
     def getStatus():
         token_receive = request.cookies.get('mytoken')
-        print(token_receive)
         if token_receive is not None:
             return jsonify({'result': 'success', 'bool': True})
         else:
@@ -75,7 +74,7 @@ def start(app, data=''):
         changAddrResultJsonify = userService.change_user_addr(request)
         return changAddrResultJsonify
 
-    @app.route('/user/update', methods=['POST'])
+    @app.route('/api/user/update', methods=['POST'])
     def postUserInfo():
         resultJsonify = userService.user_update(request)
         return resultJsonify

@@ -17,11 +17,9 @@ def start(app, data=''):
         else:
             return redirect(url_for("getLogin"))
         address = userService.get_jwt_user_info(request.cookies.get('mytoken'))['address']
-        print(address)
         info = tempService.get_info_from_address(address)
         x, y = info['x'], info['y']
         SKY, PTY, T1H = tempService.get_SKY_PTY_T1H_in_short_term_forecast(x, y)
-        print(T1H)
         return render_template('weather.html', SKY=SKY, PTY=PTY, T1H=T1H, check_weather=check_weather, address=address)
 
     @app.route('/weather/<local>', methods=['GET'])

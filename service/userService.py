@@ -1,9 +1,9 @@
 import hashlib
-from datetime import timedelta
 
 import jwt
 from flask import jsonify
-from datetime import datetime
+
+from config import token_max_age
 from model import usersDao
 
 SECRET_KEY = "SPARTA"
@@ -19,7 +19,7 @@ def make_user_info_json(name, password, username, address):
 def make_jwt_token(username):
     payload = {
         'id': username,
-        'exp': datetime.utcnow() + timedelta(seconds=60 * 60 * 24)  # 로그인 24시간 유지
+        'exp': token_max_age  # 로그인 24시간 유지
     }
     token = jwt.encode(payload, SECRET_KEY, algorithm='HS256')
     return token
